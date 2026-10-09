@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | CyberShield - Next-Gen AI Cybersecurity</title>
+  <meta name="description" content="Learn about CyberShield's mission, cybersecurity research team, global SOC operations, and industry compliance certifications.">
+  
+  <link rel="icon" type="image/webp" href="assets/logoStackly.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- PRELOADER OVERLAY -->
+  <div id="preloader-overlay" class="preloader-overlay">
+    <div class="preloader-wrapper">
+      <div class="preloader-graphics-stage">
+        <svg class="preloader-svg-graphic" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(0, 243, 255, 0.15)" stroke-width="4"></circle>
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#00f3ff" stroke-width="4" stroke-dasharray="70 180" stroke-linecap="round"></circle>
+        </svg>
+        <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="preloader-icon">
+      </div>
+      <div class="preloader-status-text">INITIALIZING ABOUT US...</div>
+      <div class="preloader-bar-bg">
+        <div id="preloader-bar-fill" class="preloader-bar-fill"></div>
+      </div>
+      <div id="preloader-percent-label" class="preloader-percent-label">0%</div>
+    </div>
+  </div>
+
+  <!-- Global Interactive Fixed Particle Canvas -->
+  <canvas id="global-bg-canvas"></canvas>
+  <div class="cyber-grid-overlay"></div>
+
+  <!-- Top Info Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <span><i class="fa-solid fa-location-dot" style="color: var(--primary-cyan);"></i> Cyber Tech Park Phase II, Bangalore, KA - 560066</span>
+        <span><i class="fa-solid fa-phone" style="color: var(--primary-cyan);"></i> +91 80 4567 8900</span>
+        <span><i class="fa-solid fa-clock" style="color: var(--matrix-green);"></i> Support: 24/7 Telemetry SOC Monitoring</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="404.html" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="404.html" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="404.html" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Header -->
+  <header class="cyber-header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="brand-logo-img"></a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link active">About Us</a></li>
+        <li><a href="services.html" class="nav-link">Solutions</a></li>
+        <li><a href="research.html" class="nav-link">Research</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-secondary" style="padding: 8px 18px;">Login</a>
+        <a href="create-account.html" class="btn btn-primary" style="padding: 8px 18px;">Get Started</a>
+      </div>
+
+      <button class="mobile-toggle" aria-label="Toggle Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-panel" id="mobile-nav-panel">
+    <div class="mobile-nav-header">
+      <a href="index.html" class="logo">
+        <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="brand-logo-img" style="height: 36px;"></a>
+      <button class="mobile-toggle" id="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul class="mobile-nav-menu">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link active">About Us</a></li>
+      <li><a href="services.html" class="nav-link">Solutions</a></li>
+      <li><a href="research.html" class="nav-link">Research</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <a href="login.html" class="btn btn-secondary" style="justify-content: center;">Login</a>
+      <a href="create-account.html" class="btn btn-primary" style="justify-content: center;">Get Started</a>
+    </div>
+  </div>
+
+  <!-- Page Banner -->
+  <section class="page-banner">
+    <div class="container">
+      <div class="cyber-badge">PIONEERING CYBER RESILIENCE</div>
+      <h1>About <span class="text-gradient">CyberShield</span></h1>
+      <p>We build autonomous AI threat intelligence and zero-trust security infrastructure to protect global financial systems, healthcare networks, and enterprise workloads.</p>
+    </div>
+  </section>
+
+  <!-- Mission & Story -->
+  <section class="solutions-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="reveal-on-scroll">
+          <div class="cyber-badge" style="margin-bottom: 16px;">OUR MISSION</div>
+          <h2>Securing the Digital Frontier Against Modern Threat Vectors</h2>
+          <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px;">
+            Founded by elite cybersecurity researchers and former defense SOC engineers, CyberShield combines autonomous machine learning models with 24/7 human SOC intelligence.
+          </p>
+          <p style="color: var(--text-muted); margin-bottom: 30px;">
+            Our mission is simple: eliminate cyber vulnerability window gaps by predicting, isolating, and neutralizing malicious attacks in under 1 millisecond.
+          </p>
+          <div class="about-stats-grid">
+            <div style="background: var(--bg-card); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1;">
+              <h3 style="color: var(--primary-cyan); font-size: 2rem;">15+</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">Global Security Operations Centers</p>
+            </div>
+            <div style="background: var(--bg-card); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+              <h3 style="color: var(--matrix-green); font-size: 2rem;">250+</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">Elite Security Researchers &amp; Engineers</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual-card reveal-on-scroll">
+          <div style="border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border-color);">
+            <img src="assets/about-soc.webp" alt="Global Security Operations Center Team" style="width: 100%; height: 230px; object-fit: cover; display: block;">
+          </div>
+          <h3 style="margin-bottom: 12px;">Global Threat Operations Network</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Our distributed edge PoPs analyze over 14 Billion telemetry events every single day across 45 countries.</p>
+          <div class="audit-metrics-grid" style="grid-template-columns: 1fr;">
+            <div class="audit-metric-item">
+              <div class="audit-metric-title">PRIMARY SOC NODE</div>
+              <div class="audit-metric-status" style="color: var(--primary-cyan);"><i class="fa-solid fa-server"></i> Bangalore Tech Hub - ACTIVE</div>
+            </div>
+            <div class="audit-metric-item">
+              <div class="audit-metric-title">REDUNDANT NODE</div>
+              <div class="audit-metric-status" style="color: var(--matrix-green);"><i class="fa-solid fa-server"></i> US East &amp; Frankfurt - ONLINE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 1: Executive Leadership & Threat Research Team -->
+  <section class="team-section" id="leadership">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">ELITE THREAT RESEARCHERS</div>
+        <h2>Executive Security Leadership</h2>
+        <p>Helmed by cybersecurity veterans, former defense SOC engineers, and quantum cryptography pioneers.</p>
+      </div>
+
+      <div class="team-grid reveal-on-scroll">
+        <div class="team-card card-3d-tilt" data-leader="vikram" style="cursor: pointer;">
+          <div class="team-avatar-box">
+            <img src="assets/leader-vikram.webp" alt="Dr. Vikram Sharma" class="team-avatar-img">
+          </div>
+          <h3 class="team-name">Dr. Vikram Sharma</h3>
+          <div class="team-role">Chief Executive Officer</div>
+          <p class="team-bio">Former Defense Cyber Cell Lead with 18+ years in national threat intelligence &amp; autonomous SOC engineering.</p>
+          <div class="team-socials">
+            <a href="404.html" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="404.html" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="team-card card-3d-tilt" data-leader="elena" style="cursor: pointer;">
+          <div class="team-avatar-box">
+            <img src="assets/leader-elena.webp" alt="Elena Rostova" class="team-avatar-img">
+          </div>
+          <h3 class="team-name">Elena Rostova</h3>
+          <div class="team-role">Chief Technology Officer</div>
+          <p class="team-bio">Pioneer in deep neural network heuristic sandboxing and zero-day threat prediction algorithms.</p>
+          <div class="team-socials">
+            <a href="404.html" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="404.html" title="GitHub"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="team-card card-3d-tilt" data-leader="marcus" style="cursor: pointer;">
+          <div class="team-avatar-box">
+            <img src="assets/leader-marcus.webp" alt="Marcus Vance" class="team-avatar-img">
+          </div>
+          <h3 class="team-name">Marcus Vance</h3>
+          <div class="team-role">Chief Information Security Officer</div>
+          <p class="team-bio">Architect of high-frequency banking PCI-DSS 4.0 HSM hardware and Zero-Trust microsegmentation.</p>
+          <div class="team-socials">
+            <a href="404.html" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="404.html" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="team-card card-3d-tilt" data-leader="sarah" style="cursor: pointer;">
+          <div class="team-avatar-box">
+            <img src="assets/leader-sarah.webp" alt="Sarah Lin" class="team-avatar-img">
+          </div>
+          <h3 class="team-name">Sarah Lin</h3>
+          <div class="team-role">Head of Incident Response</div>
+          <p class="team-bio">Directs global 24/7 SOC incident response teams with sub-15 minute ransomware containment SLA.</p>
+          <div class="team-socials">
+            <a href="404.html" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="404.html" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 2: Zero-Trust Engineering Principles & Core Philosophy -->
+  <section class="values-section" id="engineering-values">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">OUR ENGINEERING CODE</div>
+        <h2>Zero-Trust Engineering Principles</h2>
+        <p>The foundational design principles governing every algorithm, agent, and API built at CyberShield.</p>
+      </div>
+
+      <div class="intel-grid reveal-on-scroll">
+        <div class="values-grid" style="margin-top: 0;">
+          <div class="value-card">
+            <div class="value-number">01</div>
+            <div class="value-icon"><i class="fa-solid fa-robot"></i></div>
+            <h3>Autonomous Threat Isolation</h3>
+            <p>AI models sandbox, isolate, and terminate malicious payloads in under 1 millisecond.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-number">02</div>
+            <div class="value-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <h3>Never Trust, Always Verify</h3>
+            <p>Continuous mTLS authentication and biometric risk scoring across all networks.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-number">03</div>
+            <div class="value-icon"><i class="fa-solid fa-key"></i></div>
+            <h3>Cryptographic Sovereignty</h3>
+            <p>Client-controlled hardware encryption keys with zero third-party telemetry exposure.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-number">04</div>
+            <div class="value-icon"><i class="fa-solid fa-atom"></i></div>
+            <h3>Post-Quantum Defense</h3>
+            <p>Hybrid Kyber-1024 lattice key exchanges shielding long-term data assets.</p>
+          </div>
+        </div>
+
+        <div class="hero-visual-card card-3d-tilt">
+          <div style="border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border-glow); box-shadow: var(--glow-cyan);">
+            <img src="assets/threat-matrix.webp" alt="Zero-Trust Cyber Matrix Architecture" style="width: 100%; height: 280px; object-fit: cover; display: block;">
+          </div>
+          <h3>Zero-Trust Architecture Matrix</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Real-time continuous verification layer protecting multi-tenant microservices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications & Audit Security Grid -->
+  <section class="cert-section">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">ENTERPRISE AUDIT &amp; COMPLIANCE</div>
+        <h2>Enterprise Certifications &amp; <span class="text-gradient">Audit Security</span></h2>
+        <p>CyberShield undergoes rigorous third-party audits to guarantee total data privacy, sovereignty, and security compliance.</p>
+      </div>
+
+      <div class="cert-grid reveal-on-scroll">
+        <!-- Feature Visual Card -->
+        <div class="hero-visual-card card-3d-tilt" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="cyber-badge" style="margin-bottom: 14px; border-color: var(--matrix-green); color: var(--matrix-green);">
+              CONTINUOUS VERIFICATION
+            </div>
+            <div style="border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border-color);">
+              <img src="assets/solutions-hero.webp" alt="Enterprise Security Certifications" style="width: 100%; height: 210px; object-fit: cover; display: block;">
+            </div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Continuous SOC 2 Type II &amp; ISO Audits</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.65;">
+              Annual third-party security audits and penetration assessments conducted by accredited independent CPAs and QSAs.
+            </p>
+          </div>
+          <div class="cyber-badge" style="font-size: 0.78rem; margin-top: 20px; width: max-content;">
+            <span class="pulse-dot"></span> ALL CERTIFICATIONS CURRENT &amp; ACTIVE
+          </div>
+        </div>
+
+        <!-- 2x2 Certification Badges Grid -->
+        <div class="cert-2x2-grid">
+          <div class="cert-badge-card card-3d-tilt">
+            <i class="fa-solid fa-certificate" style="color: var(--primary-cyan); font-size: 1.6rem; margin-bottom: 12px;"></i>
+            <div style="font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; color: var(--primary-cyan); margin-bottom: 6px;">SOC 2</div>
+            <div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Type II Certified</div>
+            <div style="font-size: 0.84rem; color: var(--text-muted);">AICPA Verified Annual Audit</div>
+          </div>
+
+          <div class="cert-badge-card card-3d-tilt">
+            <i class="fa-solid fa-shield-halved" style="color: var(--matrix-green); font-size: 1.6rem; margin-bottom: 12px;"></i>
+            <div style="font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; color: var(--matrix-green); margin-bottom: 6px;">ISO 27001</div>
+            <div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">ISMS Stage II</div>
+            <div style="font-size: 0.84rem; color: var(--text-muted);">Global Security Standards</div>
+          </div>
+
+          <div class="cert-badge-card card-3d-tilt">
+            <i class="fa-solid fa-heart-pulse" style="color: #ffb703; font-size: 1.6rem; margin-bottom: 12px;"></i>
+            <div style="font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; color: #ffb703; margin-bottom: 6px;">HIPAA</div>
+            <div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">PHI Enforced</div>
+            <div style="font-size: 0.84rem; color: var(--text-muted);">BAA Agreement Ready</div>
+          </div>
+
+          <div class="cert-badge-card card-3d-tilt">
+            <i class="fa-solid fa-credit-card" style="color: var(--purple-accent); font-size: 1.6rem; margin-bottom: 12px;"></i>
+            <div style="font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800; color: var(--purple-accent); margin-bottom: 6px;">PCI-DSS</div>
+            <div style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Level 1 Payment</div>
+            <div style="font-size: 0.84rem; color: var(--text-muted);">QSA Audited &amp; HSM Ready</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 3: Global Data Center & SOC Infrastructure Network -->
+  <section class="infra-section" id="global-infrastructure">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">GLOBAL FOOTPRINT</div>
+        <h2>SOC Command Infrastructure Network</h2>
+        <p>Redundant data centers, edge scrubbing PoPs, and airgapped vault facilities spanning 4 continents.</p>
+      </div>
+
+      <div class="infra-grid reveal-on-scroll">
+        <div class="infra-card">
+          <div class="cyber-badge" style="border-color: var(--primary-cyan); font-size: 0.7rem; margin-bottom: 12px;">PRIMARY HQ</div>
+          <h4>Bangalore SOC Command</h4>
+          <div class="infra-location"><i class="fa-solid fa-location-dot"></i> Tech Park Phase II, KA</div>
+          <div class="infra-metric-row"><span>Status:</span> <span style="color: var(--matrix-green); font-weight: 700;">ONLINE (0.012ms)</span></div>
+          <div class="infra-metric-row"><span>Engineers:</span> <span>150+ On-Site SOC Analysts</span></div>
+          <div class="infra-metric-row"><span>Facility Tier:</span> <span>Tier IV Airgapped Vault</span></div>
+        </div>
+
+        <div class="infra-card">
+          <div class="cyber-badge" style="border-color: var(--matrix-green); font-size: 0.7rem; margin-bottom: 12px;">AI THREAT LAB</div>
+          <h4>Silicon Valley Lab</h4>
+          <div class="infra-location"><i class="fa-solid fa-location-dot"></i> San Jose, CA, USA</div>
+          <div class="infra-metric-row"><span>Status:</span> <span style="color: var(--matrix-green); font-weight: 700;">ONLINE (0.018ms)</span></div>
+          <div class="infra-metric-row"><span>Engineers:</span> <span>60+ ML Researchers</span></div>
+          <div class="infra-metric-row"><span>Focus:</span> <span>Zero-Day Heuristics</span></div>
+        </div>
+
+        <div class="infra-card">
+          <div class="cyber-badge" style="border-color: var(--purple-accent); font-size: 0.7rem; margin-bottom: 12px;">EU SOVEREIGN</div>
+          <h4>Frankfurt Data Vault</h4>
+          <div class="infra-location"><i class="fa-solid fa-location-dot"></i> Frankfurt, Germany</div>
+          <div class="infra-metric-row"><span>Status:</span> <span style="color: var(--matrix-green); font-weight: 700;">ONLINE (0.009ms)</span></div>
+          <div class="infra-metric-row"><span>Compliance:</span> <span>GDPR &amp; ISO 27001</span></div>
+          <div class="infra-metric-row"><span>Encryption:</span> <span>Quantum Kyber-1024</span></div>
+        </div>
+
+        <div class="infra-card">
+          <div class="cyber-badge" style="border-color: #ff9900; font-size: 0.7rem; margin-bottom: 12px;">APAC SCRUBBING</div>
+          <h4>Tokyo Edge Hub</h4>
+          <div class="infra-location"><i class="fa-solid fa-location-dot"></i> Tokyo, Japan</div>
+          <div class="infra-metric-row"><span>Status:</span> <span style="color: var(--matrix-green); font-weight: 700;">ONLINE (0.015ms)</span></div>
+          <div class="infra-metric-row"><span>DDoS Capacity:</span> <span>12.4 Tbps Anycast</span></div>
+          <div class="infra-metric-row"><span>Response SLA:</span> <span>&lt; 2 Milliseconds</span></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-glow); box-shadow: var(--glow-cyan);" class="reveal-on-scroll card-3d-tilt">
+        <img src="assets/contact-hotline.webp" alt="Global Security Operations Command Room" style="width: 100%; height: 260px; object-fit: cover; display: block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="cyber-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="brand-logo-img" style="height: 38px;"></a>
+          <p>Next-generation AI cyber defense platform providing autonomous SOC monitoring, threat hunting, and infrastructure resilience.</p>
+          <div class="footer-socials">
+            <a href="404.html" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="404.html" aria-label="Twitter X" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="404.html" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="404.html" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="404.html" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="404.html" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Solutions</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Accounts &amp; SOC</h4>
+          <ul class="footer-links">
+            <li><a href="404.html">Login Portal</a></li>
+            <li><a href="404.html">Get Started</a></li>
+            <li><a href="404.html">User Dashboard</a></li>
+            <li><a href="404.html">Admin SOC Dashboard</a></li>
+            <li><a href="404.html">Pricing Tiers</a></li>
+            <li><a href="404.html">Reset Credentials</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Compliance &amp; Legal</h4>
+          <ul class="footer-links">
+            <li><a href="404.html">Privacy Policy</a></li>
+            <li><a href="404.html">Terms of Service</a></li>
+            <li><a href="404.html">SOC 2 Type II Certified</a></li>
+            <li><a href="404.html">ISO 27001 Compliant</a></li>
+            <li><a href="404.html">GDPR &amp; CCPA Data SLA</a></li>
+            <li><a href="404.html">Security Disclosures</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 CyberShield Inc. All rights reserved. Built for modern digital resilience.</div>
+        <div class="footer-legal-links">
+          <a href="404.html">Privacy Policy</a>
+          <span>&bull;</span>
+          <a href="404.html">Terms of Service</a>
+          <span>&bull;</span>
+          <a href="404.html">Security Disclosures</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Executive Leadership Profile Modal -->
+  <div id="leader-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 620px; background: rgba(10, 14, 23, 0.95); backdrop-filter: blur(20px);">
+      <button class="modal-close" id="leader-modal-close"><i class="fa-solid fa-xmark"></i></button>
+
+      <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);">
+        <div style="width: 84px; height: 84px; border-radius: 50%; overflow: hidden; border: 2px solid var(--primary-cyan); flex-shrink: 0; box-shadow: 0 0 16px rgba(0, 243, 255, 0.4);">
+          <img id="modal-leader-img" src="assets/about-soc.webp" alt="Leader Profile" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div>
+          <div class="cyber-badge" style="font-size: 0.7rem; padding: 2px 8px; margin-bottom: 6px;">EXECUTIVE PROFILE</div>
+          <h3 id="modal-leader-name" style="font-size: 1.4rem; margin-bottom: 4px;">Dr. Vikram Sharma</h3>
+          <div id="modal-leader-role" style="color: var(--primary-cyan); font-family: var(--font-mono); font-size: 0.9rem; font-weight: 600;">Chief Executive Officer</div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div>
+          <h4 style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-user-shield" style="color: var(--primary-cyan);"></i> Executive Biography
+          </h4>
+          <p id="modal-leader-bio" style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+            Former Defense Cyber Cell Lead with over 18 years of national threat intelligence and autonomous SOC engineering experience.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-graduation-cap" style="color: var(--matrix-green);"></i> Academic &amp; Defense Background
+          </h4>
+          <p id="modal-leader-edu" style="color: var(--text-muted); font-size: 0.9rem;">
+            Ph.D. in Computer Science &amp; Quantum Cryptography, IISc Bangalore / MIT
+          </p>
+        </div>
+
+        <div>
+          <h4 style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-award" style="color: #ff9900;"></i> Patents &amp; Research Publications
+          </h4>
+          <p id="modal-leader-patents" style="color: var(--text-muted); font-size: 0.9rem;">
+            Autonomous Heuristic Sandboxing in Sub-Millisecond Windows (US Patent #11,849,204)
+          </p>
+        </div>
+
+        <div>
+          <h4 style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-certificate" style="color: var(--purple-accent);"></i> Security Credentials &amp; Certifications
+          </h4>
+          <p id="modal-leader-certs" style="color: var(--text-muted); font-size: 0.9rem;">
+            CISSP, CISM, OSCE (Offensive Security Certified Expert)
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-color); display: flex; justify-content: flex-end; gap: 12px;">
+        <button class="btn btn-secondary" id="modal-leader-close-btn">Close Profile</button>
+        <a href="contact.html" class="btn btn-primary">Schedule Executive Briefing</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

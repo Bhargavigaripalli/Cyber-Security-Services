@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Page Not Found | CyberShield</title>
+  <meta name="description" content="The requested security endpoint or telemetry node was not found on the CyberShield platform.">
+  
+  <!-- Favicon Logo matching referral -->
+  <link rel="icon" type="image/webp" href="assets/logoStackly.webp">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body style="min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; padding: 20px;">
+
+  <!-- PRELOADER OVERLAY -->
+  <div id="preloader-overlay" class="preloader-overlay">
+    <div class="preloader-wrapper">
+      <div class="preloader-graphics-stage">
+        <svg class="preloader-svg-graphic" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(0, 243, 255, 0.15)" stroke-width="4"></circle>
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#00f3ff" stroke-width="4" stroke-dasharray="70 180" stroke-linecap="round"></circle>
+        </svg>
+        <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="preloader-icon">
+      </div>
+      <div class="preloader-status-text">INITIALIZING CYBERSHIELD PLATFORM...</div>
+      <div class="preloader-bar-bg">
+        <div id="preloader-bar-fill" class="preloader-bar-fill"></div>
+      </div>
+      <div id="preloader-percent-label" class="preloader-percent-label">0%</div>
+    </div>
+  </div>
+
+  <!-- Global Interactive Fixed Particle Canvas -->
+  <canvas id="global-bg-canvas"></canvas>
+  <div class="cyber-grid-overlay"></div>
+
+  <!-- Centered Standalone 404 Portal Container -->
+  <div class="container" style="max-width: 680px; width: 100%; position: relative; z-index: 5;">
+    <div style="background: rgba(10, 15, 26, 0.85); border: 1px solid var(--border-glow); border-radius: 24px; padding: 48px 32px; box-shadow: var(--glow-cyan); backdrop-filter: blur(20px); text-align: center;">
+      
+      <!-- Brand Logo -->
+      <div style="margin-bottom: 24px;">
+        <a href="index.html" class="logo" style="display: inline-block;">
+          <img src="assets/logoStackly.webp" alt="CyberShield Logo" style="height: 48px;">
+        </a>
+      </div>
+
+      <div class="cyber-badge" style="border-color: #ff2a5f; color: #ff2a5f; background: rgba(255, 42, 95, 0.1); margin-bottom: 16px;">
+        <i class="fa-solid fa-triangle-exclamation"></i> ERROR 404 &bull; ENDPOINT QUARANTINED
+      </div>
+      
+      <h1 style="font-size: clamp(4.5rem, 10vw, 7.5rem); font-weight: 800; font-family: var(--font-mono); line-height: 1; margin-bottom: 8px; background: linear-gradient(135deg, #00f3ff 0%, #ff2a5f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 25px rgba(0, 243, 255, 0.4));">
+        404
+      </h1>
+
+      <h2 style="font-size: 1.6rem; margin-bottom: 14px; color: var(--text-main);">
+        Security Vector Not Found
+      </h2>
+
+      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto;">
+        The requested security node, telemetry resource, or page address could not be located on the CyberShield platform array. It may have been relocated, restricted, or isolated by SOC protocol.
+      </p>
+
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <button onclick="window.history.back()" class="btn btn-secondary" style="padding: 12px 26px; cursor: pointer;">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Go Back</span>
+        </button>
+
+        <a href="index.html" class="btn btn-primary" style="padding: 12px 26px;">
+          <i class="fa-solid fa-house"></i>
+          <span>Return to Home</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin SOC Command Center | CyberShield</title>
+  <meta name="description" content="CyberShield Admin SOC Command Center for global telemetry control, threat containment, and infrastructure status.">
+  <link rel="icon" type="image/webp" href="assets/logoStackly.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Reset button styles inside sidebar nav */
+    .dash-sidebar-nav button.dash-nav-item {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      font-family: inherit;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER OVERLAY -->
+  <div id="preloader-overlay" class="preloader-overlay">
+    <div class="preloader-wrapper">
+      <div class="preloader-graphics-stage">
+        <svg class="preloader-svg-graphic" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255, 42, 95, 0.15)" stroke-width="4"></circle>
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#ff2a5f" stroke-width="4" stroke-dasharray="70 180" stroke-linecap="round"></circle>
+        </svg>
+        <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="preloader-icon">
+      </div>
+      <div class="preloader-status-text" style="color: #ff2a5f;">INITIALIZING ADMIN COMMAND CENTER...</div>
+      <div class="preloader-bar-bg">
+        <div id="preloader-bar-fill" class="preloader-bar-fill" style="background: linear-gradient(90deg, #ff2a5f, var(--warning-amber));"></div>
+      </div>
+      <div id="preloader-percent-label" class="preloader-percent-label" style="color: #ff2a5f;">0%</div>
+    </div>
+  </div>
+
+  <!-- Global Interactive Fixed Particle Canvas & Scanline -->
+  <canvas id="global-bg-canvas"></canvas>
+  <div class="cyber-scanline"></div>
+  <div class="cyber-grid-overlay"></div>
+
+  <!-- Referral Sidebar Dashboard Layout -->
+  <div class="dash-layout">
+
+    <!-- Left Sidebar Navigation -->
+    <aside class="dash-sidebar" id="admin-dash-sidebar" style="border-right-color: rgba(255, 42, 95, 0.25);">
+      <div>
+        <!-- Brand Logo Block & Mobile Close Button -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <a href="index.html" class="dash-brand-block" style="margin-bottom: 0;">
+            <img src="assets/logoStackly.webp" alt="CyberShield Logo" style="height: 38px;">
+          </a>
+          <button type="button" class="dash-sidebar-close-btn" onclick="toggleDashSidebar(false)" aria-label="Close Navigation">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- User Info Card -->
+        <div class="dash-sidebar-user-card" style="border-color: rgba(255, 42, 95, 0.3);">
+          <div class="dash-avatar" style="border-color: #ff2a5f; color: #ff2a5f; background: rgba(255, 42, 95, 0.15);">SOC</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.9rem; color: #ffffff;">Chief SOC Officer</div>
+            <div style="font-size: 0.7rem; color: #ff2a5f; font-family: var(--font-mono);">MASTER ADMIN CONTROL</div>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu Buttons -->
+        <nav class="dash-sidebar-nav">
+          <button type="button" onclick="switchAdminTab('admin-tab-overview', this)" class="dash-nav-item active" style="border-color: rgba(255, 42, 95, 0.4); box-shadow: inset 0 0 12px rgba(255, 42, 95, 0.1);">
+            <i class="fa-solid fa-chart-pie" style="color: #ff2a5f;"></i>
+            <span>Overview & Telemetry</span>
+          </button>
+          <button type="button" onclick="switchAdminTab('admin-tab-matrix', this)" class="dash-nav-item">
+            <i class="fa-solid fa-satellite-dish"></i>
+            <span>Global Threat Matrix</span>
+          </button>
+          <button type="button" onclick="switchAdminTab('admin-tab-bgp', this)" class="dash-nav-item">
+            <i class="fa-solid fa-server"></i>
+            <span>BGP Scrubbing Nodes</span>
+          </button>
+          <button type="button" onclick="switchAdminTab('admin-tab-ebpf', this)" class="dash-nav-item">
+            <i class="fa-solid fa-terminal"></i>
+            <span>Kernel eBPF Engine</span>
+          </button>
+          <button type="button" onclick="switchAdminTab('admin-tab-firewall', this)" class="dash-nav-item">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Firewall Capacity</span>
+          </button>
+          <button type="button" onclick="switchAdminTab('admin-tab-quarantine', this)" class="dash-nav-item">
+            <i class="fa-solid fa-biohazard"></i>
+            <span>Quarantine Control</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Bottom Sidebar Links -->
+      <div class="dash-sidebar-footer" style="border-top-color: rgba(255, 42, 95, 0.2);">
+        <a href="dashboard-user.html" class="dash-nav-item" style="color: var(--primary-cyan); font-weight: 600;">
+          <i class="fa-solid fa-user"></i>
+          <span>Switch to User Console</span>
+        </a>
+        <a href="login.html" class="dash-nav-item">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Sign Out</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Dashboard Area -->
+    <main class="dash-main-area">
+
+      <!-- Sticky Top Header Navbar -->
+      <header class="dash-sticky-navbar admin-sticky-navbar">
+        <div class="dash-navbar-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logoStackly.webp" alt="CyberShield Logo" style="height: 36px;">
+          </a>
+          <span class="dash-navbar-title" style="color: #ff2a5f;">ADMIN SOC DASHBOARD</span>
+        </div>
+        <div class="dash-navbar-actions">
+          <a href="dashboard-user.html" class="dash-btn-outline" style="padding: 6px 14px; font-size: 0.82rem; border-color: rgba(255, 42, 95, 0.4); color: #ff2a5f;">
+            <i class="fa-solid fa-user"></i> User View
+          </a>
+          <button type="button" class="dash-mobile-toggle" onclick="toggleDashSidebar()" aria-label="Toggle Navigation" style="color: #ff2a5f; border-color: rgba(255, 42, 95, 0.4);">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- ==================== TAB 1: OVERVIEW & TELEMETRY ==================== -->
+      <div id="admin-tab-overview" class="admin-tab-view">
+        <div>
+          <div class="dash-top-badge" style="background: rgba(255, 42, 95, 0.12); border-color: rgba(255, 42, 95, 0.4); color: #ff2a5f;">
+            <span class="dash-dot-indicator" style="background: #ff2a5f; box-shadow: 0 0 8px #ff2a5f;"></span>
+            CYBERSHIELD MASTER SOC (GLOBAL DEFCON 1 PROTOCOL)
+          </div>
+        </div>
+
+        <div class="dash-title-row">
+          <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; margin: 0;">
+            Admin / SOC Command Center
+          </h1>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button onclick="window.location.href='404.html';" class="dash-btn-primary-white">
+              <i class="fa-solid fa-terminal"></i> PUSH eBPF RULE
+            </button>
+            <a href="dashboard-user.html" class="dash-btn-outline">
+              <i class="fa-solid fa-user"></i> USER VIEW
+            </a>
+          </div>
+        </div>
+
+        <!-- 4 Stat Cards Grid -->
+        <div class="dash-metrics-grid">
+          <div class="dash-stat-card" style="border-color: rgba(255, 42, 95, 0.2);">
+            <div class="dash-stat-label">GLOBAL TELEMETRY RATE</div>
+            <div class="dash-stat-value">14.8B / s</div>
+            <div class="dash-stat-sub"><i class="fa-solid fa-arrow-trend-up"></i> +24.1% vs peak capacity</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255, 42, 95, 0.2);">
+            <div class="dash-stat-label">ACTIVE SCRUBBING CENTERS</div>
+            <div class="dash-stat-value green">98 Nodes</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">100% Global Scrub Uptime</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255, 42, 95, 0.2);">
+            <div class="dash-stat-label">MITIGATED DDoS VOLUME</div>
+            <div class="dash-stat-value" style="color: #ff2a5f;">3.2 Tbps</div>
+            <div class="dash-stat-sub" style="color: #ff2a5f;"><i class="fa-solid fa-triangle-exclamation"></i> 1.5 Tbps above baseline</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255, 42, 95, 0.2);">
+            <div class="dash-stat-label">DEFCON DEFENSE LEVEL</div>
+            <div class="dash-stat-value green">LEVEL 1</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">Maximum Containment Active</div>
+          </div>
+        </div>
+
+        <!-- Content 2-Column Grid -->
+        <div class="dash-content-grid">
+          <div class="dash-panel-card" style="border-color: rgba(255, 42, 95, 0.25);">
+            <div class="dash-panel-header">
+              <div class="dash-panel-title">
+                <i class="fa-solid fa-satellite-dish" style="color: #ff2a5f;"></i>
+                GLOBAL SOC INCIDENT & CONTAINMENT STREAM
+              </div>
+              <span class="dash-pill-status" style="background: rgba(255,42,95,0.15); border-color: rgba(255,42,95,0.4); color: #ff2a5f;">
+                DEFCON 1 ACTIVE
+              </span>
+            </div>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem;">
+                <thead>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-family: var(--font-mono); font-size: 0.75rem;">
+                    <th style="padding: 12px 10px;">TARGET SUBNET</th>
+                    <th style="padding: 12px 10px;">ATTACK VECTOR</th>
+                    <th style="padding: 12px 10px;">INCOMING VOLUME</th>
+                    <th style="padding: 12px 10px;">TIMER</th>
+                    <th style="padding: 12px 10px;">ACTION STATUS</th>
+                  </tr>
+                </thead>
+                <tbody style="font-family: var(--font-mono);">
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <td style="padding: 14px 10px; font-weight: 700; color: #ffffff;">192.168.10.0/24</td>
+                    <td style="padding: 14px 10px; color: #cbd5e1;">SYN Flood Volumetric</td>
+                    <td style="padding: 14px 10px; color: #ff2a5f; font-weight: 700;">1.8 Tbps</td>
+                    <td style="padding: 14px 10px; color: var(--primary-cyan); font-weight: 700;">00:14</td>
+                    <td style="padding: 14px 10px;">
+                      <span class="dash-pill-status" style="background: rgba(0, 255, 157, 0.12); border-color: rgba(0, 255, 157, 0.4); color: var(--matrix-green);">BGP SCRUBBED</span>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <td style="padding: 14px 10px; font-weight: 700; color: #ffffff;">10.4.0.0/16</td>
+                    <td style="padding: 14px 10px; color: #cbd5e1;">SQLi Injection Payload</td>
+                    <td style="padding: 14px 10px; color: var(--warning-amber); font-weight: 700;">420 req/s</td>
+                    <td style="padding: 14px 10px; color: var(--warning-amber); font-weight: 700;">01:02</td>
+                    <td style="padding: 14px 10px;">
+                      <span class="dash-pill-status" style="background: rgba(0, 243, 255, 0.12); border-color: rgba(0, 243, 255, 0.4); color: var(--primary-cyan);">WAF DROPPED</span>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <td style="padding: 14px 10px; font-weight: 700; color: #ffffff;">172.16.88.0/20</td>
+                    <td style="padding: 14px 10px; color: #cbd5e1;">Ransomware C2 Ping</td>
+                    <td style="padding: 14px 10px; color: #ff2a5f; font-weight: 700;">Critical</td>
+                    <td style="padding: 14px 10px; color: #ff2a5f; font-weight: 700;">03:45</td>
+                    <td style="padding: 14px 10px;">
+                      <span class="dash-pill-status" style="background: rgba(255, 42, 95, 0.15); border-color: rgba(255, 42, 95, 0.5); color: #ff2a5f;">IP QUARANTINED</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 14px 10px; font-weight: 700; color: #ffffff;">198.51.100.0/24</td>
+                    <td style="padding: 14px 10px; color: #cbd5e1;">DNS Amplification Attack</td>
+                    <td style="padding: 14px 10px; color: var(--warning-amber); font-weight: 700;">850 Gbps</td>
+                    <td style="padding: 14px 10px; color: var(--warning-amber); font-weight: 700;">05:10</td>
+                    <td style="padding: 14px 10px;">
+                      <span class="dash-pill-status" style="background: rgba(255, 183, 3, 0.12); border-color: rgba(255, 183, 3, 0.4); color: var(--warning-amber);">EMERGENCY LOCK</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="dash-panel-card" style="border-color: rgba(255, 42, 95, 0.25);">
+            <div class="dash-panel-title" style="margin-bottom: 24px;">
+              <i class="fa-solid fa-sliders" style="color: #ff2a5f;"></i>
+              MASTER SCRUBBING & CAPACITY
+            </div>
+            <div class="dash-progress-item">
+              <div class="dash-progress-labels">
+                <span style="font-weight: 600; color: #ffffff;">Primary BGP Scrubbing</span>
+                <span style="font-family: var(--font-mono); font-weight: 700; color: #ffffff;">82 / 100 Gbps</span>
+              </div>
+              <div class="dash-progress-track">
+                <div class="dash-progress-fill" style="width: 82%; background: #ffffff;"></div>
+              </div>
+            </div>
+            <div class="dash-progress-item">
+              <div class="dash-progress-labels">
+                <span style="font-weight: 600; color: #ffffff;">Global Threat Cache</span>
+                <span style="font-family: var(--font-mono); font-weight: 700; color: #ffffff;">35 / 100 % left</span>
+              </div>
+              <div class="dash-progress-track">
+                <div class="dash-progress-fill" style="width: 65%; background: var(--matrix-green);"></div>
+              </div>
+            </div>
+            <div class="dash-progress-item">
+              <div class="dash-progress-labels">
+                <span style="font-weight: 600; color: #ffffff;">Quarantine Subnet Buffer</span>
+                <span style="font-family: var(--font-mono); font-weight: 700; color: #ff2a5f;">2 / 50 left (LOW)</span>
+              </div>
+              <div class="dash-progress-track">
+                <div class="dash-progress-fill" style="width: 10%; background: #ff2a5f;"></div>
+              </div>
+            </div>
+            <button onclick="window.location.href='404.html';" class="dash-btn-outline" style="width: 100%; justify-content: center; margin-top: 24px; border-color: rgba(255, 42, 95, 0.4); background: rgba(255, 42, 95, 0.1); color: #ff2a5f;">
+              <i class="fa-solid fa-biohazard"></i> TRIGGER SUB-NET QUARANTINE
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 2: GLOBAL THREAT MATRIX ==================== -->
+      <div id="admin-tab-matrix" class="admin-tab-view" style="display: none;">
+        <div>
+          <div class="dash-top-badge" style="background: rgba(255, 42, 95, 0.12); border-color: rgba(255, 42, 95, 0.4); color: #ff2a5f;">
+            <span class="dash-dot-indicator" style="background: #ff2a5f;"></span>
+            DEFCON 1 GLOBAL THREAT MATRIX & LIVE CONTAINMENT
+          </div>
+        </div>
+
+        <div class="dash-title-row">
+          <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; margin: 0;">
+            Global Threat Matrix & Containment Stream
+          </h1>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button onclick="window.location.href='404.html';" class="dash-btn-primary-white">
+              <i class="fa-solid fa-download"></i> EXPORT MATRIX JSON
+            </button>
+          </div>
+        </div>
+
+        <div class="dash-metrics-grid">
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">CONTAINED ATTACKS (24H)</div>
+            <div class="dash-stat-value" style="color: #ff2a5f;">142,890</div>
+            <div class="dash-stat-sub" style="color: #ff2a5f;"><i class="fa-solid fa-shield-virus"></i> High volume mitigated</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">TOP ATTACK VECTOR</div>
+            <div class="dash-stat-value">UDP Flood</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">L4 Volumetric</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">PRIMARY TARGET REGION</div>
+            <div class="dash-stat-value">US-East</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">Ashburn Datacenter PoP</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">AUTOPILOT BLOCK RATE</div>
+            <div class="dash-stat-value green">100%</div>
+            <div class="dash-stat-sub" style="color: var(--matrix-green);"><i class="fa-solid fa-check"></i> Zero bypasses</div>
+          </div>
+        </div>
+
+        <div class="dash-panel-card" style="border-color: rgba(255,42,95,0.25);">
+          <div class="dash-panel-title" style="margin-bottom: 20px;">
+            <i class="fa-solid fa-map-location-dot" style="color: #ff2a5f;"></i>
+            GLOBAL ATTACK VECTOR & INCIDENT STREAM LOG
+          </div>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-family: var(--font-mono); font-size: 0.75rem;">
+                  <th style="padding: 12px 10px;">VECTOR ID</th>
+                  <th style="padding: 12px 10px;">TARGET POP</th>
+                  <th style="padding: 12px 10px;">ATTACK PATTERN</th>
+                  <th style="padding: 12px 10px;">PEAK RATE</th>
+                  <th style="padding: 12px 10px;">ADMIN COMMAND</th>
+                </tr>
+              </thead>
+              <tbody style="font-family: var(--font-mono);">
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 14px 10px; color: #ffffff; font-weight: 700;">#VEC-9901</td>
+                  <td style="padding: 14px 10px; color: #cbd5e1;">Ashburn (US-East 1)</td>
+                  <td style="padding: 14px 10px; color: #94a3b8;">DNS Amplification 850 Gbps</td>
+                  <td style="padding: 14px 10px; color: #ff2a5f;">CRITICAL</td>
+                  <td style="padding: 14px 10px;">
+                    <button onclick="window.location.href='404.html';" class="dash-btn-outline" style="padding: 4px 10px; font-size: 0.75rem; border-color: #ff2a5f; color: #ff2a5f;">
+                      <i class="fa-solid fa-ban"></i> QUARANTINE SUBNET
+                    </button>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 14px 10px; color: #ffffff; font-weight: 700;">#VEC-9902</td>
+                  <td style="padding: 14px 10px; color: #cbd5e1;">Frankfurt (EU-Central)</td>
+                  <td style="padding: 14px 10px; color: #94a3b8;">HTTP/2 Rapid Reset Exploit</td>
+                  <td style="padding: 14px 10px; color: var(--warning-amber);">HIGH</td>
+                  <td style="padding: 14px 10px;">
+                    <button onclick="window.location.href='404.html';" class="dash-btn-outline" style="padding: 4px 10px; font-size: 0.75rem;">
+                      <i class="fa-solid fa-route"></i> BGP FILTER
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 3: BGP SCRUBBING NODES ==================== -->
+      <div id="admin-tab-bgp" class="admin-tab-view" style="display: none;">
+        <div>
+          <div class="dash-top-badge" style="background: rgba(0, 255, 157, 0.1); border-color: rgba(0, 255, 157, 0.3); color: var(--matrix-green);">
+            <span class="dash-dot-indicator"></span>
+            98 GLOBAL BGP SCRUBBING CENTERS (100% ONLINE)
+          </div>
+        </div>
+
+        <div class="dash-title-row">
+          <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; margin: 0;">
+            BGP Scrubbing Centers & Anycast POP Control
+          </h1>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button onclick="window.location.href='404.html';" class="dash-btn-primary-white">
+              <i class="fa-solid fa-rotate"></i> REBALANCE ANYCAST BGP
+            </button>
+          </div>
+        </div>
+
+        <div class="dash-metrics-grid">
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">TOTAL AGGREGATE CAPACITY</div>
+            <div class="dash-stat-value green">100 Tbps</div>
+            <div class="dash-stat-sub"><i class="fa-solid fa-server"></i> Global Anycast Ring</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">CURRENT NETWORK LOAD</div>
+            <div class="dash-stat-value">3.2 Tbps (3.2%)</div>
+            <div class="dash-stat-sub" style="color: var(--matrix-green);">Massive headroom</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">ANYCAST POP CENTERS</div>
+            <div class="dash-stat-value green">98 PoPs</div>
+            <div class="dash-stat-sub" style="color: var(--matrix-green);">100% Online</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">AVERAGE EDGE LATENCY</div>
+            <div class="dash-stat-value">8.4 ms</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">Global average</div>
+          </div>
+        </div>
+
+        <div class="dash-panel-card" style="border-color: rgba(255,42,95,0.25);">
+          <div class="dash-panel-title" style="margin-bottom: 20px;">
+            <i class="fa-solid fa-network-wired" style="color: var(--primary-cyan);"></i>
+            PRIMARY SCRUBBING POP CENTER STATUS & LATENCY
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+            <div style="background: rgba(7,9,14,0.6); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 700; color: #ffffff;">Ashburn PoP (US-East)</span>
+                <span class="dash-pill-status" style="background: rgba(0,255,157,0.12); color: var(--matrix-green); border-color: var(--matrix-green);">100% CAPACITY</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Latency: 0.012 ms | Load: 1.8 Tbps</div>
+              <button onclick="window.location.href='404.html';" class="dash-btn-outline" style="width: 100%; justify-content: center; font-size: 0.8rem; padding: 8px;">
+                <i class="fa-solid fa-sliders"></i> Deep Scrubbing Options
+              </button>
+            </div>
+
+            <div style="background: rgba(7,9,14,0.6); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 700; color: #ffffff;">Frankfurt PoP (EU-Central)</span>
+                <span class="dash-pill-status" style="background: rgba(0,255,157,0.12); color: var(--matrix-green); border-color: var(--matrix-green);">100% CAPACITY</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Latency: 0.014 ms | Load: 890 Gbps</div>
+              <button onclick="window.location.href='404.html';" class="dash-btn-outline" style="width: 100%; justify-content: center; font-size: 0.8rem; padding: 8px;">
+                <i class="fa-solid fa-sliders"></i> Deep Scrubbing Options
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 4: KERNEL eBPF ENGINE ==================== -->
+      <div id="admin-tab-ebpf" class="admin-tab-view" style="display: none;">
+        <div>
+          <div class="dash-top-badge" style="background: rgba(255, 42, 95, 0.12); border-color: rgba(255, 42, 95, 0.4); color: #ff2a5f;">
+            <span class="dash-dot-indicator" style="background: #ff2a5f;"></span>
+            KERNEL-LEVEL eBPF PACKET FILTERING ENGINE
+          </div>
+        </div>
+
+        <div class="dash-title-row">
+          <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; margin: 0;">
+            Kernel eBPF Engine & Bytecode Compiler
+          </h1>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button onclick="window.location.href='404.html';" class="dash-btn-primary-white">
+              <i class="fa-solid fa-code"></i> COMPILE & DEPLOY RULE
+            </button>
+          </div>
+        </div>
+
+        <div class="dash-metrics-grid">
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">COMPILED RULES IN KERNEL</div>
+            <div class="dash-stat-value green">1,420 Rules</div>
+            <div class="dash-stat-sub"><i class="fa-solid fa-check"></i> JIT Compiled x86_64</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">AVG EXECUTION TIME</div>
+            <div class="dash-stat-value">0.002 ms</div>
+            <div class="dash-stat-sub" style="color: var(--matrix-green);">Zero context switches</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">JIT COMPILER STATUS</div>
+            <div class="dash-stat-value green">ACTIVE</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">Ring 0 Execution</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">VERIFIER STATUS</div>
+            <div class="dash-stat-value green">PASSED</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">0 Memory Leaks</div>
+          </div>
+        </div>
+
+        <div class="dash-panel-card" style="border-color: rgba(255,42,95,0.25);">
+          <div class="dash-panel-title" style="margin-bottom: 20px;">
+            <i class="fa-solid fa-terminal" style="color: #ff2a5f;"></i>
+            ACTIVE eBPF C KERNEL RULE SOURCE (filter_syn_flood.c)
+          </div>
+          <div class="pgp-key-code" style="color: var(--primary-cyan); font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap;">SEC("xdp")
+int filter_syn_flood(struct xdp_md *ctx) {
+    void *data_end = (void *)(long)ctx->data_end;
+    void *data     = (void *)(long)ctx->data;
+    struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end) return XDP_PASS;
+    if (eth->h_proto == bpf_htons(ETH_P_IP)) {
+        struct iphdr *iph = (void *)(eth + 1);
+        if ((void *)(iph + 1) > data_end) return XDP_PASS;
+        if (iph->protocol == IPPROTO_TCP) {
+            struct tcphdr *tcph = (void *)(iph + 1);
+            if ((void *)(tcph + 1) > data_end) return XDP_PASS;
+            if (tcph->syn && !tcph->ack) return XDP_DROP; // Instant Sub-Millisecond Drop
+        }
+    }
+    return XDP_PASS;
+}</div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 5: FIREWALL CAPACITY ==================== -->
+      <div id="admin-tab-firewall" class="admin-tab-view" style="display: none;">
+        <div>
+          <div class="dash-top-badge" style="background: rgba(255, 42, 95, 0.12); border-color: rgba(255, 42, 95, 0.4); color: #ff2a5f;">
+            <span class="dash-dot-indicator" style="background: #ff2a5f;"></span>
+            GLOBAL FIREWALL & CAPACITY MANAGEMENT
+          </div>
+        </div>
+
+        <div class="dash-title-row">
+          <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; margin: 0;">
+            Firewall Capacity & Resource Depletion
+          </h1>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button onclick="window.location.href='404.html';" class="dash-btn-primary-white">
+              <i class="fa-solid fa-expand"></i> EXPAND BUFFER QUEUE
+            </button>
+          </div>
+        </div>
+
+        <div class="dash-metrics-grid">
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">SYN FLOOD TABLE</div>
+            <div class="dash-stat-value green">18% Used</div>
+            <div class="dash-stat-sub"><i class="fa-solid fa-check"></i> High availability</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">STATEFUL SESSION TRACK</div>
+            <div class="dash-stat-value">42% Used</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">10M Concurrent Sessions</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">DNS CACHE POOL</div>
+            <div class="dash-stat-value green">65% Used</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">Global Scrubbing Sync</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">QUARANTINE BUFFER</div>
+            <div class="dash-stat-value" style="color: #ff2a5f;">10% Remaining</div>
+            <div class="dash-stat-sub" style="color: #ff2a5f;"><i class="fa-solid fa-triangle-exclamation"></i> Low capacity</div>
+          </div>
+        </div>
+
+        <div class="dash-panel-card" style="border-color: rgba(255,42,95,0.25);">
+          <div class="dash-panel-title" style="margin-bottom: 24px;">
+            <i class="fa-solid fa-sliders" style="color: #ff2a5f;"></i>
+            MASTER FIREWALL BUFFER DEPLETION GAUGES
+          </div>
+          <div class="dash-progress-item">
+            <div class="dash-progress-labels">
+              <span style="font-weight: 600; color: #ffffff;">Primary BGP Scrubbing Bandwidth</span>
+              <span style="font-family: var(--font-mono); font-weight: 700; color: #ffffff;">82 / 100 Gbps</span>
+            </div>
+            <div class="dash-progress-track">
+              <div class="dash-progress-fill" style="width: 82%; background: #ffffff;"></div>
+            </div>
+          </div>
+          <div class="dash-progress-item">
+            <div class="dash-progress-labels">
+              <span style="font-weight: 600; color: #ffffff;">Global Threat Cache Memory</span>
+              <span style="font-family: var(--font-mono); font-weight: 700; color: #ffffff;">35 / 100 % left</span>
+            </div>
+            <div class="dash-progress-track">
+              <div class="dash-progress-fill" style="width: 65%; background: var(--matrix-green);"></div>
+            </div>
+          </div>
+          <div class="dash-progress-item">
+            <div class="dash-progress-labels">
+              <span style="font-weight: 600; color: #ffffff;">Quarantine Subnet Buffer</span>
+              <span style="font-family: var(--font-mono); font-weight: 700; color: #ff2a5f;">2 / 50 left (LOW)</span>
+            </div>
+            <div class="dash-progress-track">
+              <div class="dash-progress-fill" style="width: 10%; background: #ff2a5f;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 6: QUARANTINE CONTROL ==================== -->
+      <div id="admin-tab-quarantine" class="admin-tab-view" style="display: none;">
+        <div>
+          <div class="dash-top-badge" style="background: rgba(255, 42, 95, 0.12); border-color: rgba(255, 42, 95, 0.4); color: #ff2a5f;">
+            <span class="dash-dot-indicator" style="background: #ff2a5f;"></span>
+            ROOT PRIVILEGE SUBNET & HOST QUARANTINE HUB
+          </div>
+        </div>
+
+        <div class="dash-title-row">
+          <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; margin: 0;">
+            Subnet Quarantine & Host Containment Hub
+          </h1>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button onclick="window.location.href='404.html';" class="dash-btn-primary-white" style="background: #ff2a5f; color: #ffffff;">
+              <i class="fa-solid fa-biohazard"></i> ISOLATE NEW SUBNET
+            </button>
+          </div>
+        </div>
+
+        <div class="dash-metrics-grid">
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">QUARANTINED SUBNETS</div>
+            <div class="dash-stat-value" style="color: #ff2a5f;">3 Subnets</div>
+            <div class="dash-stat-sub" style="color: #ff2a5f;"><i class="fa-solid fa-lock"></i> Isolated BGP Null-route</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">ISOLATED C2 HOSTS</div>
+            <div class="dash-stat-value">18 Hosts</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">Ransomware containment</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">CONTAINMENT EFFICIENCY</div>
+            <div class="dash-stat-value green">100%</div>
+            <div class="dash-stat-sub" style="color: var(--matrix-green);"><i class="fa-solid fa-shield"></i> Zero leakage</div>
+          </div>
+          <div class="dash-stat-card" style="border-color: rgba(255,42,95,0.2);">
+            <div class="dash-stat-label">SANCTUARY VAULT STATUS</div>
+            <div class="dash-stat-value green">SECURE</div>
+            <div class="dash-stat-sub" style="color: var(--text-muted);">Forensic snapshots active</div>
+          </div>
+        </div>
+
+        <div class="dash-panel-card" style="border-color: rgba(255,42,95,0.25);">
+          <div class="dash-panel-title" style="margin-bottom: 20px;">
+            <i class="fa-solid fa-biohazard" style="color: #ff2a5f;"></i>
+            CURRENTLY QUARANTINED SUBNET CIDR BLOCKS
+          </div>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-family: var(--font-mono); font-size: 0.75rem;">
+                  <th style="padding: 12px 10px;">TARGET CIDR</th>
+                  <th style="padding: 12px 10px;">REASON / VECTOR</th>
+                  <th style="padding: 12px 10px;">ISOLATION DURATION</th>
+                  <th style="padding: 12px 10px;">ACTION COMMAND</th>
+                </tr>
+              </thead>
+              <tbody style="font-family: var(--font-mono);">
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 14px 10px; color: #ff2a5f; font-weight: 700;">192.168.10.0/24</td>
+                  <td style="padding: 14px 10px; color: #cbd5e1;">Active Ransomware Exfiltration</td>
+                  <td style="padding: 14px 10px; color: var(--warning-amber);">02h 14m active</td>
+                  <td style="padding: 14px 10px;">
+                    <button onclick="window.location.href='404.html';" class="dash-btn-outline" style="padding: 4px 10px; font-size: 0.75rem;">
+                      <i class="fa-solid fa-unlock"></i> RELEASE SUBNET
+                    </button>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 14px 10px; color: #ff2a5f; font-weight: 700;">172.16.88.0/20</td>
+                  <td style="padding: 14px 10px; color: #cbd5e1;">Botnet C2 Gateway Detection</td>
+                  <td style="padding: 14px 10px; color: var(--warning-amber);">05h 48m active</td>
+                  <td style="padding: 14px 10px;">
+                    <button onclick="window.location.href='404.html';" class="dash-btn-outline" style="padding: 4px 10px; font-size: 0.75rem;">
+                      <i class="fa-solid fa-unlock"></i> RELEASE SUBNET
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberShield | Next-Gen AI Cybersecurity & Threat Defense Platform</title>
+  <meta name="description" content="Protect your enterprise with intelligent threat detection, real-time SOC monitoring, automated response, and next-generation cybersecurity.">
+  
+  <!-- Favicon Logo matching referral -->
+  <link rel="icon" type="image/webp" href="assets/logoStackly.webp">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for Icons matching referral -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- PRELOADER OVERLAY (Matching Referral Website) -->
+  <div id="preloader-overlay" class="preloader-overlay">
+    <div class="preloader-wrapper">
+      <div class="preloader-graphics-stage">
+        <svg class="preloader-svg-graphic" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(0, 243, 255, 0.15)" stroke-width="4"></circle>
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#00f3ff" stroke-width="4" stroke-dasharray="70 180" stroke-linecap="round"></circle>
+        </svg>
+        <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="preloader-icon">
+      </div>
+      <div class="preloader-status-text">INITIALIZING CYBERSHIELD PLATFORM...</div>
+      <div class="preloader-bar-bg">
+        <div id="preloader-bar-fill" class="preloader-bar-fill"></div>
+      </div>
+      <div id="preloader-percent-label" class="preloader-percent-label">0%</div>
+    </div>
+  </div>
+
+  <!-- Global Interactive Fixed Particle Canvas -->
+  <canvas id="global-bg-canvas"></canvas>
+
+  <!-- Cyber Grid Background Overlay -->
+  <div class="cyber-grid-overlay"></div>
+
+  <!-- Top Info Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <span><i class="fa-solid fa-location-dot" style="color: var(--primary-cyan);"></i> Cyber Tech Park Phase II, Bangalore, KA - 560066</span>
+        <span><i class="fa-solid fa-phone" style="color: var(--primary-cyan);"></i> +91 80 4567 8900</span>
+        <span><i class="fa-solid fa-clock" style="color: var(--matrix-green);"></i> Support: 24/7 Telemetry SOC Monitoring</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="404.html" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="404.html" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="404.html" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Responsive Header -->
+  <header class="cyber-header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="brand-logo-img"></a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="services.html" class="nav-link">Solutions</a></li>
+        <li><a href="research.html" class="nav-link">Research</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-secondary" style="padding: 8px 18px;">Login</a>
+        <a href="create-account.html" class="btn btn-primary" style="padding: 8px 18px;">Get Started</a>
+      </div>
+
+      <button class="mobile-toggle" aria-label="Toggle Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-panel" id="mobile-nav-panel">
+    <div class="mobile-nav-header">
+      <a href="index.html" class="logo">
+        <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="brand-logo-img" style="height: 36px;"></a>
+      <button class="mobile-toggle" id="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul class="mobile-nav-menu">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="services.html" class="nav-link">Solutions</a></li>
+      <li><a href="research.html" class="nav-link">Research</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <a href="login.html" class="btn btn-secondary" style="justify-content: center;">Login</a>
+      <a href="create-account.html" class="btn btn-primary" style="justify-content: center;">Get Started</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-content reveal-on-scroll">
+        <div class="cyber-badge">
+          <span class="pulse-dot"></span>
+          Establishing Secure Connection... SYSTEM ONLINE
+        </div>
+
+        <h1>
+          See Every Threat.<br>
+          <span class="text-gradient">Stop It Before Impact.</span>
+        </h1>
+
+        <p>
+          Gain complete visibility across your digital infrastructure with intelligent AI threat detection that continuously analyzes telemetry, uncovers anomalies, and mitigates cyber attacks in real time.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="404.html" class="btn btn-primary">
+            <span>Talk to a Security Expert</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+          <a href="404.html" class="btn btn-secondary">
+            <span>Explore Solutions</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual Card with WebP Graphic -->
+      <div class="hero-visual-card reveal-on-scroll">
+        <div class="hero-visual-header">
+          <div class="terminal-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+          <span class="font-mono" style="font-size: 0.8rem; color: var(--primary-cyan);">LIVE TELEMETRY RADAR</span>
+        </div>
+
+        <div style="position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 16px; border: 1px solid var(--border-color);">
+          <img src="assets/hero-cyber.webp" alt="Cyber Security Operations Center Dashboard" style="width: 100%; height: 210px; object-fit: cover; display: block;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(7, 9, 14, 0.95), transparent 60%);"></div>
+          <div class="cyber-badge" style="position: absolute; bottom: 12px; left: 12px; font-size: 0.75rem;">
+            <span class="pulse-dot"></span> AI RADAR SWEEP ACTIVE
+          </div>
+        </div>
+
+        <div class="telemetry-mini-stats">
+          <div class="mini-stat-item">
+            <div class="mini-stat-label">AI Shield Status</div>
+            <div class="mini-stat-value" style="color: var(--matrix-green);">PROTECTED</div>
+          </div>
+
+          <div class="mini-stat-item">
+            <div class="mini-stat-label">Global Latency</div>
+            <div class="mini-stat-value">&lt; 0.8ms</div>
+          </div>
+
+          <div class="mini-stat-item">
+            <div class="mini-stat-label">Threats Filtered</div>
+            <div class="mini-stat-value">14,890 / sec</div>
+          </div>
+
+          <div class="mini-stat-item">
+            <div class="mini-stat-label">SOC Engine</div>
+            <div class="mini-stat-value">Autonomous</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Threat Metrics Ticker Bar -->
+  <section class="metrics-banner-section">
+    <div class="container metrics-grid">
+      <div class="metric-card reveal-on-scroll">
+        <div class="metric-number"><span class="counter-val" data-target="99">0</span>.99%</div>
+        <div class="metric-label">Threat Mitigation Success</div>
+      </div>
+
+      <div class="metric-card reveal-on-scroll">
+        <div class="metric-number"><span class="counter-val" data-target="14">0</span>B+</div>
+        <div class="metric-label">Attacks Blocked Annually</div>
+      </div>
+
+      <div class="metric-card reveal-on-scroll">
+        <div class="metric-number">&lt;<span class="counter-val" data-target="1">0</span>ms</div>
+        <div class="metric-label">Autonomous Response Time</div>
+      </div>
+
+      <div class="metric-card reveal-on-scroll">
+        <div class="metric-number"><span class="counter-val" data-target="500">0</span>k+</div>
+        <div class="metric-label">Secured Enterprise Endpoints</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Threat Simulator Section -->
+  <section class="simulator-section" id="simulator">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">REAL-TIME DEFENSE MATRIX</div>
+        <h2>Interactive Threat Simulator</h2>
+        <p>Test how CyberShield’s autonomous SOC mitigates zero-day vectors, DDoS assaults, ransomware encryption, and credential theft.</p>
+      </div>
+
+      <div class="simulator-container reveal-on-scroll">
+        <div class="simulator-controls">
+          <button class="sim-btn active" data-threat="ddos">
+            <i class="fa-solid fa-bolt"></i> DDoS Volumetric Scrubbing
+          </button>
+          <button class="sim-btn" data-threat="ransomware">
+            <i class="fa-solid fa-lock"></i> Ransomware Shadow Shield
+          </button>
+          <button class="sim-btn" data-threat="zero_day">
+            <i class="fa-solid fa-triangle-exclamation"></i> Zero-Day Exploit Heuristics
+          </button>
+          <button class="sim-btn" data-threat="phishing">
+            <i class="fa-solid fa-user-shield"></i> Phishing &amp; Identity Guard
+          </button>
+        </div>
+
+        <div class="simulator-display">
+          <div class="sim-visual-box">
+            <div class="threat-status-header">
+              <span id="sim-threat-name" class="threat-type-title">DDoS Mitigation Layer</span>
+              <span class="cyber-badge" style="border-color: var(--matrix-green);">ACTIVE SHIELD</span>
+            </div>
+
+            <div class="defense-gauge-container">
+              <div class="gauge-circle" id="sim-gauge-circle">
+                <div class="gauge-inner">
+                  <div class="gauge-score" id="sim-gauge-score">99.9%</div>
+                  <div class="gauge-label">DEFENSE RATING</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="font-mono" style="font-size: 0.8rem; color: var(--text-dim); text-align: center;">
+              Status: AI Sandboxing Active &bull; Zero Downtime Enforced
+            </div>
+          </div>
+
+          <div class="sim-logs-box" id="sim-logs">
+            <div class="log-line log-info">[00:00:01] SYSTEM: CyberShield Threat Simulation initialized.</div>
+            <div class="log-line log-warn">[00:00:02] ALERT: Volumetric Syn-Flood attack detected (1.4 Terabits/sec).</div>
+            <div class="log-line log-info">[00:00:03] SOC AI: Engaging Automated BGP Anycast scrubbing nodes.</div>
+            <div class="log-line log-success">[00:00:04] SUCCESS: Target server load stabilized at 12% CPU.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instant Domain Security Auditor Tool -->
+  <section class="auditor-section" id="auditor">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">INSTANT VULNERABILITY SCANNER</div>
+        <h2>Test Your Infrastructure Security</h2>
+        <p>Enter your enterprise domain or public IP to run an automated synthetic cyber audit.</p>
+      </div>
+
+      <div class="auditor-box reveal-on-scroll">
+        <form class="scan-form" id="domain-scan-form">
+          <div class="scan-input-wrapper">
+            <i class="fa-solid fa-globe scan-input-icon"></i>
+            <input type="text" id="domain-input" class="scan-input" placeholder="e.g. yourcompany.com" required>
+          </div>
+          <div class="scan-input-wrapper">
+            <i class="fa-solid fa-envelope scan-input-icon"></i>
+            <input type="email" id="email-input" class="scan-input" placeholder="Enter your Gmail / Work Email" required>
+          </div>
+          <button type="submit" class="btn btn-glow-green">
+            <span>Run Instant Scan</span>
+            <i class="fa-solid fa-microchip"></i>
+          </button>
+        </form>
+
+        <div class="scan-results" id="scan-results">
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+          </div>
+
+          <h3 id="scanned-domain-name" style="margin-bottom: 16px;">Analyzing target...</h3>
+
+          <div class="audit-metrics-grid">
+            <div class="audit-metric-item">
+              <div class="audit-metric-title">SSL / TLS Certificate</div>
+              <div class="audit-metric-status" style="color: var(--matrix-green);">
+                <i class="fa-solid fa-circle-check"></i> TLS 1.3 ENCRYPTED
+              </div>
+            </div>
+
+            <div class="audit-metric-item">
+              <div class="audit-metric-title">DNSSEC &amp; Headers</div>
+              <div class="audit-metric-status" style="color: var(--matrix-green);">
+                <i class="fa-solid fa-circle-check"></i> HSTS ENFORCED
+              </div>
+            </div>
+
+            <div class="audit-metric-item">
+              <div class="audit-metric-title">Overall Cyber Score</div>
+              <div class="audit-metric-status" id="overall-cyber-score" style="color: var(--primary-cyan);">
+                CALCULATING...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 1: Global Threat Intelligence Radar & Live Stream -->
+  <section class="intel-section" id="global-intelligence">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">REAL-TIME GLOBAL TELEMETRY</div>
+        <h2>Global Threat Intelligence Stream</h2>
+        <p>Live cyber attack telemetry aggregated from CyberShield edge sensor nodes across 84 global data centers.</p>
+      </div>
+
+      <div class="intel-grid reveal-on-scroll">
+        <div class="intel-feed-card">
+          <div class="intel-feed-header">
+            <div style="font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;">
+              <span class="pulse-dot"></span> Live Intercept Stream
+            </div>
+            <div class="intel-filters">
+              <button class="intel-filter-btn active" data-filter="all">All Attacks</button>
+              <button class="intel-filter-btn" data-filter="critical">Critical</button>
+              <button class="intel-filter-btn" data-filter="ddos">DDoS</button>
+              <button class="intel-filter-btn" data-filter="zero_day">Zero-Day</button>
+            </div>
+          </div>
+
+          <table class="intel-table">
+            <thead>
+              <tr>
+                <th>TIMESTAMP</th>
+                <th>TARGET NODE</th>
+                <th>ATTACK VECTOR</th>
+                <th>SEVERITY</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-type="critical">
+                <td>13:14:02</td>
+                <td>US-East (Virginia)</td>
+                <td>LockBit 3.0 Ransomware</td>
+                <td><span class="cyber-badge" style="border-color: var(--alert-red); color: var(--alert-red); padding: 2px 8px; font-size: 0.7rem;">CRITICAL</span></td>
+                <td style="color: var(--matrix-green);"><i class="fa-solid fa-shield-check"></i> BLOCKED (2ms)</td>
+              </tr>
+              <tr data-type="ddos">
+                <td>13:13:58</td>
+                <td>EU-Central (Frankfurt)</td>
+                <td>SYN Flood (1.8 Tbps)</td>
+                <td><span class="cyber-badge" style="border-color: #ff9900; color: #ff9900; padding: 2px 8px; font-size: 0.7rem;">HIGH</span></td>
+                <td style="color: var(--matrix-green);"><i class="fa-solid fa-bolt"></i> SCRUBBED</td>
+              </tr>
+              <tr data-type="zero_day">
+                <td>13:13:45</td>
+                <td>AP-South (Bangalore)</td>
+                <td>Kernel Heap Overflow</td>
+                <td><span class="cyber-badge" style="border-color: var(--alert-red); color: var(--alert-red); padding: 2px 8px; font-size: 0.7rem;">CRITICAL</span></td>
+                <td style="color: var(--matrix-green);"><i class="fa-solid fa-microchip"></i> ISOLATED</td>
+              </tr>
+              <tr data-type="critical">
+                <td>13:13:30</td>
+                <td>AP-East (Tokyo)</td>
+                <td>SQL Injection Probe</td>
+                <td><span class="cyber-badge" style="border-color: var(--primary-cyan); color: var(--primary-cyan); padding: 2px 8px; font-size: 0.7rem;">MEDIUM</span></td>
+                <td style="color: var(--matrix-green);"><i class="fa-solid fa-filter"></i> FILTERED</td>
+              </tr>
+              <tr data-type="ddos">
+                <td>13:13:12</td>
+                <td>SA-East (São Paulo)</td>
+                <td>UDP Amplification</td>
+                <td><span class="cyber-badge" style="border-color: #ff9900; color: #ff9900; padding: 2px 8px; font-size: 0.7rem;">HIGH</span></td>
+                <td style="color: var(--matrix-green);"><i class="fa-solid fa-shield-check"></i> MITIGATED</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="intel-hud-visual">
+          <div class="cyber-badge" style="margin-bottom: 16px;">AUTONOMOUS RADAR SCAN</div>
+          <div class="hud-map-radar">
+            <div class="radar-ring radar-ring-1"></div>
+            <div class="radar-ring radar-ring-2"></div>
+            <div class="radar-ring radar-ring-3"></div>
+            <div class="hud-pulse-node" style="top: 30%; left: 40%;" title="Active Defense Node: Bangalore"></div>
+            <div class="hud-pulse-node" style="top: 60%; left: 70%;" title="Active Defense Node: Frankfurt"></div>
+            <div class="hud-pulse-node" style="top: 45%; left: 25%;" title="Active Defense Node: Virginia"></div>
+            <i class="fa-solid fa-crosshairs" style="font-size: 2.5rem; color: var(--primary-cyan); opacity: 0.8;"></i>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-top: 12px;">
+            Targeting Latency: <span style="color: var(--matrix-green); font-weight: 700;">0.014 ms</span> &bull; Status: LOCKED
+          </div>
+        </div>
+      </div>
+
+      <div class="intel-stats-row reveal-on-scroll">
+        <div class="intel-stat-card">
+          <div class="intel-stat-val" data-target="4820941">4,820,941</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Attacks Intercepted Today</div>
+        </div>
+        <div class="intel-stat-card">
+          <div class="intel-stat-val" style="color: var(--matrix-green);">99.999%</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Threat Mitigation Rate</div>
+        </div>
+        <div class="intel-stat-card">
+          <div class="intel-stat-val">&lt; 15 ms</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Average Response SLA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Solutions Showcase Grid -->
+  <section class="solutions-section">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">ONE PLATFORM &bull; COMPLETE PROTECTION</div>
+        <h2>Enterprise Security Solutions</h2>
+        <p>Protect every layer of your digital environment with intelligent security modules engineered to detect, defend, and respond to modern threats.</p>
+      </div>
+
+      <div class="solutions-grid">
+        <div class="solution-card reveal-on-scroll">
+          <div class="solution-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>Threat Detection</h3>
+          <p>Identify malicious behavior and emerging vectors before impact. Continuously analyze activity in real time with machine learning heuristics.</p>
+          <a href="404.html" class="solution-link">Explore Solution <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="solution-card reveal-on-scroll">
+          <div class="solution-icon"><i class="fa-solid fa-desktop"></i></div>
+          <h3>Endpoint Security</h3>
+          <p>Secure workstations, servers, and IoT endpoints against malware, unauthorized command executions, and privilege escalation attacks.</p>
+          <a href="404.html" class="solution-link">Explore Solution <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="solution-card reveal-on-scroll">
+          <div class="solution-icon"><i class="fa-solid fa-network-wired"></i></div>
+          <h3>Network Defense</h3>
+          <p>Monitor network activity, detect suspicious lateral movement, and block unauthorized access with next-gen automated firewalls.</p>
+          <a href="404.html" class="solution-link">Explore Solution <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="solution-card reveal-on-scroll">
+          <div class="solution-icon"><i class="fa-solid fa-cloud"></i></div>
+          <h3>Cloud Shield</h3>
+          <p>Safeguard multi-cloud workloads, Kubernetes clusters, and serverless data pipelines across AWS, Azure, and Google Cloud environments.</p>
+          <a href="404.html" class="solution-link">Explore Solution <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="solution-card reveal-on-scroll">
+          <div class="solution-icon"><i class="fa-solid fa-user-lock"></i></div>
+          <h3>Identity &amp; Zero-Trust</h3>
+          <p>Enforce granular access control, biometric MFA, continuous risk scoring, and passwordless authentication across your organization.</p>
+          <a href="404.html" class="solution-link">Explore Solution <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="solution-card reveal-on-scroll">
+          <div class="solution-icon"><i class="fa-solid fa-robot"></i></div>
+          <h3>SOC Automation &amp; SOAR</h3>
+          <p>Automate incident response playbooks to contain ransomware, isolate compromised hosts, and file compliance audit trails in milliseconds.</p>
+          <a href="404.html" class="solution-link">Explore Solution <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 2: Industry Security Architecture & Sector Solutions -->
+  <section class="industry-section" id="industry-usecases">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">TAILORED INDUSTRY DEFENSE</div>
+        <h2>Industry Security Solutions</h2>
+        <p>Purpose-built security architectures tailored for high-stakes regulatory and operational environments.</p>
+      </div>
+
+      <div class="industry-tabs reveal-on-scroll">
+        <button class="industry-tab-btn active" data-tab="fintech">
+          <i class="fa-solid fa-building-columns"></i> Banking &amp; FinTech
+        </button>
+        <button class="industry-tab-btn" data-tab="health">
+          <i class="fa-solid fa-heart-pulse"></i> Healthcare &amp; EHR
+        </button>
+        <button class="industry-tab-btn" data-tab="saas">
+          <i class="fa-solid fa-cloud"></i> Enterprise SaaS
+        </button>
+        <button class="industry-tab-btn" data-tab="gov">
+          <i class="fa-solid fa-shield-halved"></i> Defense &amp; Gov
+        </button>
+      </div>
+
+      <!-- Panel 1: FinTech -->
+      <div class="industry-panel active" id="industry-fintech">
+        <div class="industry-details">
+          <div class="cyber-badge" style="border-color: var(--primary-cyan); color: var(--primary-cyan); margin-bottom: 12px;">FINANCIAL GRADE DEFENSE</div>
+          <h3>Protecting Digital Banking &amp; High-Frequency Payment Gateways</h3>
+          <p>Prevent credit card fraud, credential stuffing, and ATM API manipulation with ultra-low latency transaction inspection and PCI-DSS 4.0 hardware security module integration.</p>
+          <ul class="industry-feature-list">
+            <li><i class="fa-solid fa-check"></i> Sub-millisecond SWIFT &amp; UPI payload inspection</li>
+            <li><i class="fa-solid fa-check"></i> Tokenized API security with OAuth2 mTLS enforcement</li>
+            <li><i class="fa-solid fa-check"></i> Real-time AML &amp; synthetic identity fraud detection</li>
+          </ul>
+          <a href="404.html" class="btn btn-primary">Deploy FinTech Architecture</a>
+        </div>
+        <div class="industry-visual-box card-3d-tilt">
+          <img src="assets/solutions-hero.webp" alt="FinTech Cybersecurity Defense" class="industry-img">
+        </div>
+      </div>
+
+      <!-- Panel 2: Healthcare -->
+      <div class="industry-panel" id="industry-health">
+        <div class="industry-details">
+          <div class="cyber-badge" style="border-color: var(--matrix-green); color: var(--matrix-green); margin-bottom: 12px;">HIPAA &amp; PHI PROTECTED</div>
+          <h3>Securing Medical Telemetry &amp; Electronic Health Records</h3>
+          <p>Safeguard hospital IoT monitors, PACS medical imaging servers, and patient records against ransomware locks with immutable cloud backups and zero-trust microsegmentation.</p>
+          <ul class="industry-feature-list">
+            <li><i class="fa-solid fa-check"></i> Zero-Trust airgap isolation for legacy medical devices</li>
+            <li><i class="fa-solid fa-check"></i> Automated HIPAA audit logging &amp; e-Discovery compliance</li>
+            <li><i class="fa-solid fa-check"></i> AI ransomware containment (&lt; 1.2s containment SLA)</li>
+          </ul>
+          <a href="404.html" class="btn btn-primary">Deploy Healthcare Shield</a>
+        </div>
+        <div class="industry-visual-box card-3d-tilt">
+          <img src="assets/about-soc.webp" alt="Healthcare Security Command Center" class="industry-img">
+        </div>
+      </div>
+
+      <!-- Panel 3: Enterprise SaaS -->
+      <div class="industry-panel" id="industry-saas">
+        <div class="industry-details">
+          <div class="cyber-badge" style="border-color: var(--purple-accent); color: var(--purple-accent); margin-bottom: 12px;">MULTI-CLOUD KUBERNETES</div>
+          <h3>Zero-Trust Security for Cloud Native Platforms</h3>
+          <p>Continuous posture management (CSPM) and runtime container protection for Kubernetes clusters across AWS, GCP, and Azure multi-cloud infrastructures.</p>
+          <ul class="industry-feature-list">
+            <li><i class="fa-solid fa-check"></i> CI/CD pipeline vulnerability scanning &amp; SBOM tracking</li>
+            <li><i class="fa-solid fa-check"></i> Automated IAM permission drift remediation</li>
+            <li><i class="fa-solid fa-check"></i> Serverless function behavioral anomaly detection</li>
+          </ul>
+          <a href="404.html" class="btn btn-primary">Deploy Cloud SaaS Protection</a>
+        </div>
+        <div class="industry-visual-box card-3d-tilt">
+          <img src="assets/threat-matrix.webp" alt="Multi-cloud Security Matrix" class="industry-img">
+        </div>
+      </div>
+
+      <!-- Panel 4: Defense & Gov -->
+      <div class="industry-panel" id="industry-gov">
+        <div class="industry-details">
+          <div class="cyber-badge" style="border-color: var(--alert-red); color: var(--alert-red); margin-bottom: 12px;">NIST CSF &amp; FEDRAMP HIGH</div>
+          <h3>Sovereign Cyber Defense for Critical Infrastructure</h3>
+          <p>Protect power grids, SCADA industrial systems, and government networks against nation-state APT actors with post-quantum lattice cryptography.</p>
+          <ul class="industry-feature-list">
+            <li><i class="fa-solid fa-check"></i> Post-quantum hybrid encryption (Kyber-1024)</li>
+            <li><i class="fa-solid fa-check"></i> SCADA / ICS protocol anomaly inspection (Modbus/DNP3)</li>
+            <li><i class="fa-solid fa-check"></i> 24/7 sovereign SOC clearance telemetry monitoring</li>
+          </ul>
+          <a href="404.html" class="btn btn-primary">Deploy Sovereign Defense</a>
+        </div>
+        <div class="industry-visual-box card-3d-tilt">
+          <img src="assets/research-lab.webp" alt="Sovereign Defense Threat Lab" class="industry-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 3: Interactive Enterprise Protection & ROI Calculator -->
+  <section class="roi-section" id="roi-calculator">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">ESTIMATE YOUR INVESTMENT</div>
+        <h2>Enterprise Protection &amp; Cost Calculator</h2>
+        <p>Adjust your infrastructure size to calculate instant monthly platform pricing and estimated breach prevention savings.</p>
+      </div>
+
+      <div class="roi-card-box reveal-on-scroll">
+        <div class="roi-grid">
+          <div class="roi-controls">
+            <div class="roi-control-group">
+              <div class="roi-label-row">
+                <span>Protected Endpoints &amp; Servers</span>
+                <span style="color: var(--primary-cyan); font-family: var(--font-mono); font-weight: 700;" id="roi-endpoints-val">250</span>
+              </div>
+              <input type="range" min="10" max="2500" value="250" class="roi-slider" id="roi-endpoints-slider">
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); margin-top: 6px;">
+                <span>10 Nodes</span>
+                <span>2,500 Nodes</span>
+              </div>
+            </div>
+
+            <div class="roi-control-group">
+              <div class="roi-label-row">
+                <span>Cloud Accounts &amp; Kubernetes Clusters</span>
+                <span style="color: var(--matrix-green); font-family: var(--font-mono); font-weight: 700;" id="roi-cloud-val">12</span>
+              </div>
+              <input type="range" min="1" max="100" value="12" class="roi-slider" id="roi-cloud-slider">
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); margin-top: 6px;">
+                <span>1 Cluster</span>
+                <span>100 Clusters</span>
+              </div>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; font-size: 0.88rem; color: var(--text-muted);">
+              <i class="fa-solid fa-shield-halved" style="color: var(--matrix-green); margin-right: 8px;"></i> Includes 24/7 Autonomous SOC Telemetry, Unlimited Log Ingestion &amp; 15-Minute Incident SLA.
+            </div>
+          </div>
+
+          <div class="roi-results-card">
+            <div style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Estimated Platform Investment</div>
+            <div class="roi-price-display" id="roi-monthly-price">$1,274</div>
+            <div class="roi-savings-badge" id="roi-annual-savings">Save $3,058/yr with Annual Plan</div>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+              <a href="404.html" class="btn btn-primary" style="justify-content: center;">Deploy Protection Now</a>
+              <a href="404.html" class="btn btn-secondary" style="justify-content: center;">Schedule Security Briefing</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Live SOC Terminal -->
+  <section class="terminal-section" id="terminal">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">AUTONOMOUS COMMAND LINE</div>
+        <h2>Live Security Operations Center Terminal</h2>
+        <p>Interact directly with the SOC console. Type <code>help</code>, <code>/scan</code>, or <code>/shield</code> to query live platform telemetry.</p>
+      </div>
+
+      <div class="soc-terminal-window reveal-on-scroll">
+        <div class="terminal-bar">
+          <div class="terminal-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+          <div class="terminal-title">root@cybershield-soc:~ (zsh)</div>
+          <div class="cyber-badge" style="font-size: 0.75rem; padding: 2px 10px;">ENCRYPTED SESSION</div>
+        </div>
+
+        <div class="terminal-body" id="soc-terminal-output">
+          <div class="log-line log-info">CyberShield Autonomous SOC Engine v4.9.2</div>
+          <div class="log-line log-success">Connected to Global Threat Feed Node #8491 (US-East).</div>
+          <div class="log-line">Type 'help' to view executable commands.</div>
+        </div>
+
+        <div style="padding: 12px 24px; background: #07090e; border-top: 1px solid var(--border-color);">
+          <div class="terminal-input-row">
+            <span class="terminal-prompt">root@cybershield-soc:~#</span>
+            <input type="text" id="soc-cmd-input" class="terminal-cmd-input" placeholder="type a command here..." autocomplete="off">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Section 4: Enterprise Compliance & Security Standards Matrix -->
+  <section class="compliance-section" id="compliance-matrix">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <div class="cyber-badge">RIGOROUS TRUST &amp; SECURITY</div>
+        <h2>Enterprise Compliance Standards</h2>
+        <p>CyberShield undergoes annual independent third-party SOC 2 and ISO audits to ensure zero compromise on data security and privacy.</p>
+      </div>
+
+      <div class="compliance-grid reveal-on-scroll">
+        <div class="compliance-card">
+          <div class="compliance-icon"><i class="fa-solid fa-certificate"></i></div>
+          <h3>SOC 2 Type II Certified</h3>
+          <p>Verified audit reporting on Security, Availability, and Confidentiality trust service criteria issued by independent CPAs.</p>
+          <div class="compliance-status">
+            <i class="fa-solid fa-circle-check"></i> AICPA CERTIFIED &bull; ANNUAL AUDIT
+          </div>
+        </div>
+
+        <div class="compliance-card">
+          <div class="compliance-icon"><i class="fa-solid fa-file-shield"></i></div>
+          <h3>ISO/IEC 27001:2022</h3>
+          <p>International standard for information security management system (ISMS) controls across all global SOC facilities.</p>
+          <div class="compliance-status">
+            <i class="fa-solid fa-circle-check"></i> GLOBAL VERIFIED &bull; STAGE II
+          </div>
+        </div>
+
+        <div class="compliance-card">
+          <div class="compliance-icon"><i class="fa-solid fa-user-shield"></i></div>
+          <h3>HIPAA &amp; HITECH Compliant</h3>
+          <p>Enforced administrative, physical, and technical safeguards for protected health information (PHI) and medical telemetry.</p>
+          <div class="compliance-status">
+            <i class="fa-solid fa-circle-check"></i> BAA AGREEMENT READY
+          </div>
+        </div>
+
+        <div class="compliance-card">
+          <div class="compliance-icon"><i class="fa-solid fa-lock"></i></div>
+          <h3>PCI-DSS 4.0 Level 1</h3>
+          <p>Highest level of payment card industry data security standard compliance for handling cardholder data environments.</p>
+          <div class="compliance-status">
+            <i class="fa-solid fa-circle-check"></i> QSA AUDITED &bull; HSM READY
+          </div>
+        </div>
+
+        <div class="compliance-card">
+          <div class="compliance-icon"><i class="fa-solid fa-globe"></i></div>
+          <h3>GDPR &amp; CCPA Sovereignty</h3>
+          <p>Strict regional data residency controls, right-to-be-forgotten compliance, and end-to-end user privacy protection.</p>
+          <div class="compliance-status">
+            <i class="fa-solid fa-circle-check"></i> EU &amp; US DATA RESIDENCY
+          </div>
+        </div>
+
+        <div class="compliance-card">
+          <div class="compliance-icon"><i class="fa-solid fa-atom"></i></div>
+          <h3>Post-Quantum Encryption</h3>
+          <p>Hybrid Kyber-1024 and Dilithium lattice-based cryptographic algorithms protecting all data in transit and at rest.</p>
+          <div class="compliance-status">
+            <i class="fa-solid fa-circle-check"></i> QUANTUM-SAFE ENCRYPTED
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="cyber-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="brand-logo-img" style="height: 38px;"></a>
+          <p>Next-generation AI cyber defense platform providing autonomous SOC monitoring, threat hunting, and infrastructure resilience.</p>
+          <div class="footer-socials">
+            <a href="404.html" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="404.html" aria-label="Twitter X" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="404.html" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="404.html" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="404.html" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="404.html" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Solutions</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Accounts &amp; SOC</h4>
+          <ul class="footer-links">
+            <li><a href="404.html">Login Portal</a></li>
+            <li><a href="404.html">Get Started</a></li>
+            <li><a href="404.html">User Dashboard</a></li>
+            <li><a href="404.html">Admin SOC Dashboard</a></li>
+            <li><a href="404.html">Pricing Tiers</a></li>
+            <li><a href="404.html">Reset Credentials</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Compliance &amp; Legal</h4>
+          <ul class="footer-links">
+            <li><a href="404.html">Privacy Policy</a></li>
+            <li><a href="404.html">Terms of Service</a></li>
+            <li><a href="404.html">SOC 2 Type II Certified</a></li>
+            <li><a href="404.html">ISO 27001 Compliant</a></li>
+            <li><a href="404.html">GDPR &amp; CCPA Data SLA</a></li>
+            <li><a href="404.html">Security Disclosures</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 CyberShield Inc. All rights reserved. Built for modern digital resilience.</div>
+        <div class="footer-legal-links">
+          <a href="404.html">Privacy Policy</a>
+          <span>&bull;</span>
+          <a href="404.html">Terms of Service</a>
+          <span>&bull;</span>
+          <a href="404.html">Security Disclosures</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

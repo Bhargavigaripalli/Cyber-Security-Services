@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | CyberShield Defense Registration</title>
+  <meta name="description" content="Deploy CyberShield autonomous SOC protection for your cloud workloads and enterprise endpoints in under 5 minutes.">
+  
+  <!-- Favicon Logo matching referral -->
+  <link rel="icon" type="image/webp" href="assets/logoStackly.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- PRELOADER OVERLAY (Matching Referral Website) -->
+  <div id="preloader-overlay" class="preloader-overlay">
+    <div class="preloader-wrapper">
+      <div class="preloader-graphics-stage">
+        <svg class="preloader-svg-graphic" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(0, 243, 255, 0.15)" stroke-width="4"></circle>
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#00f3ff" stroke-width="4" stroke-dasharray="70 180" stroke-linecap="round"></circle>
+        </svg>
+        <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="preloader-icon">
+      </div>
+      <div class="preloader-status-text">INITIALIZING CYBERSHIELD PLATFORM...</div>
+      <div class="preloader-bar-bg">
+        <div id="preloader-bar-fill" class="preloader-bar-fill"></div>
+      </div>
+      <div id="preloader-percent-label" class="preloader-percent-label">0%</div>
+    </div>
+  </div>
+
+  <!-- Global Interactive Fixed Particle Canvas -->
+  <canvas id="global-bg-canvas"></canvas>
+
+  <div class="cyber-grid-overlay"></div>
+
+  <!-- Registration Card Container -->
+  <section class="auth-container">
+    <div class="auth-card reveal-on-scroll" style="max-width: 540px;">
+      <!-- Centered Logo and Header -->
+      <div class="auth-header" style="text-align: center;">
+        <a href="index.html" title="Return to Home" style="display: block; text-align: center; margin: 0 auto 16px auto;">
+          <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="brand-logo-img" style="height: 54px; margin: 0 auto; display: block;">
+        </a>
+        <div class="cyber-badge" style="border-color: var(--matrix-green); color: var(--matrix-green); font-size: 0.75rem; margin-bottom: 12px; display: inline-block;">14-DAY FREE TRIAL AVAILABLE</div>
+        <h2>Create Account</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Deploy autonomous threat detection across your infrastructure in under 5 minutes.</p>
+      </div>
+
+      <form id="create-account-form" onsubmit="handleCreateAccountSubmit(event)">
+        <!-- Full Name Field (Alphabets only, max 16, no spaces) -->
+        <div class="form-group">
+          <label class="form-label" for="account-name">Full Name <span style="color: var(--alert-red);">*</span></label>
+          <input type="text" id="account-name" class="form-input" placeholder="Bhargavi" maxlength="16" pattern="[A-Za-z]{1,16}" title="Full name must contain only alphabets with no spaces (maximum 16 characters)." required onkeydown="if(event.key === ' ') event.preventDefault();" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '').slice(0, 16);">
+          <small style="color: var(--text-dim); font-size: 0.78rem; display: block; margin-top: 4px;">Alphabets only, no spaces, max 16 letters.</small>
+        </div>
+
+        <!-- Gmail Address Field (Gmail format only) -->
+        <div class="form-group">
+          <label class="form-label" for="account-gmail">Gmail Address <span style="color: var(--alert-red);">*</span></label>
+          <input type="email" id="account-gmail" class="form-input font-mono" placeholder="user@gmail.com" pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$" title="Must be a valid Gmail address ending with @gmail.com" required>
+          <small style="color: var(--text-dim); font-size: 0.78rem; display: block; margin-top: 4px;">Must be in Gmail format (@gmail.com).</small>
+        </div>
+
+        <!-- Strong Password Field with Eye Mask -->
+        <div class="form-group">
+          <label class="form-label" for="account-password">Password <span style="color: var(--alert-red);">*</span></label>
+          <div style="position: relative;">
+            <input type="password" id="account-password" class="form-input font-mono" placeholder="Enter strong password..." pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character." required style="padding-right: 42px;" oninput="validatePasswordMatch();">
+            <i class="fa-solid fa-eye" id="toggle-pass-btn" onclick="togglePasswordMask('account-password', 'toggle-pass-btn')" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-muted); font-size: 1.1rem; z-index: 5;" title="Toggle Password Eye Mask"></i>
+          </div>
+          <small style="color: var(--text-dim); font-size: 0.78rem; display: block; margin-top: 4px;">At least 8 chars, 1 uppercase, 1 lowercase, 1 number, & 1 special char.</small>
+        </div>
+
+        <!-- Confirm Password Field with Eye Mask -->
+        <div class="form-group">
+          <label class="form-label" for="account-confirm-password">Confirm Password <span style="color: var(--alert-red);">*</span></label>
+          <div style="position: relative;">
+            <input type="password" id="account-confirm-password" class="form-input font-mono" placeholder="Re-enter password..." required style="padding-right: 42px;" oninput="validatePasswordMatch();">
+            <i class="fa-solid fa-eye" id="toggle-confirm-pass-btn" onclick="togglePasswordMask('account-confirm-password', 'toggle-confirm-pass-btn')" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-muted); font-size: 1.1rem; z-index: 5;" title="Toggle Confirm Password Eye Mask"></i>
+          </div>
+          <div id="password-match-error" style="color: var(--alert-red); font-size: 0.8rem; display: none; margin-top: 4px;">Passwords do not match!</div>
+        </div>
+
+        <!-- Mandatory Terms and Conditions Checkbox -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 0.88rem; color: var(--text-muted);">
+            <input type="checkbox" id="terms-checkbox" required style="accent-color: var(--primary-cyan); margin-top: 3px; cursor: pointer;">
+            <span>I agree to CyberShield's <a href="#" style="color: var(--primary-cyan);">Terms of Service</a>, <a href="#" style="color: var(--primary-cyan);">Privacy Policy</a>, and Data SLA <span style="color: var(--alert-red);">*</span></span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-glow-green" style="width: 100%; justify-content: center;">
+          <span>Create Account</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--text-muted);">
+        Already have a SOC account? <a href="login.html" style="color: var(--primary-cyan); font-weight: 600; text-decoration: none;">Login Here</a>
+        <div style="margin-top: 16px;">
+          <a href="index.html" style="color: var(--text-dim); text-decoration: none; font-size: 0.85rem;"><i class="fa-solid fa-arrow-left"></i> Return to Home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <script>
+    function togglePasswordMask(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (!input || !icon) return;
+
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+
+    function validatePasswordMatch() {
+      const pass = document.getElementById('account-password').value;
+      const confirmPass = document.getElementById('account-confirm-password').value;
+      const confirmPassInput = document.getElementById('account-confirm-password');
+      const errorMsg = document.getElementById('password-match-error');
+
+      if (confirmPass && pass !== confirmPass) {
+        confirmPassInput.setCustomValidity("Passwords do not match");
+        if (errorMsg) errorMsg.style.display = 'block';
+      } else {
+        confirmPassInput.setCustomValidity("");
+        if (errorMsg) errorMsg.style.display = 'none';
+      }
+    }
+
+    function handleCreateAccountSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('account-name').value.trim();
+      const gmail = document.getElementById('account-gmail').value.trim();
+      const pass = document.getElementById('account-password').value;
+      const confirmPass = document.getElementById('account-confirm-password').value;
+      const termsChecked = document.getElementById('terms-checkbox').checked;
+
+      // Validate Name: alphabets only, max 16, no spaces
+      if (!/^[a-zA-Z]{1,16}$/.test(name)) {
+        alert('Full name must contain only alphabets with no spaces (maximum 16 characters).');
+        document.getElementById('account-name').focus();
+        return;
+      }
+
+      // Validate Gmail format
+      if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(gmail)) {
+        alert('Gmail address must be in valid Gmail format (e.g. username@gmail.com).');
+        document.getElementById('account-gmail').focus();
+        return;
+      }
+
+      // Validate Passwords match
+      if (pass !== confirmPass) {
+        alert('Passwords do not match!');
+        document.getElementById('account-confirm-password').focus();
+        return;
+      }
+
+      // Validate Terms checked
+      if (!termsChecked) {
+        alert('You must accept the Terms and Conditions to create an account.');
+        document.getElementById('terms-checkbox').focus();
+        return;
+      }
+
+      // Redirect to login page
+      alert('Account created successfully! Redirecting to login page...');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
