@@ -1182,7 +1182,7 @@ function handleLoginSubmit(event) {
    ========================================== */
 function showHotlinePopup(event) {
   if (event) event.preventDefault();
-  alert("CyberShield Emergency SOC Hotline:\n\nPhone Number: +91 427 245 6789\nLocation: Cyber IT Park, Meyyanur, Salem, Tamil Nadu - 636004\nOperational Status: 24/7 Telemetry SOC Monitoring Active");
+  alert("CyberShield Emergency SOC Hotline:\n\nPhone Number: +91 427 245 6789\nLocation: STACKLY, Mullai Nagar, Periyakollappatty, Chinna Thirupathi (Opp. Chinna Muniyappan Kovil Bus Stop), Salem, Tamil Nadu - 636008\nOperational Status: 24/7 Telemetry SOC Monitoring Active");
 }
 
 

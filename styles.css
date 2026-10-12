@@ -135,24 +135,14 @@ body {
 
 .preloader-graphics-stage {
   position: relative;
-  width: 110px;
-  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 8px;
 }
 
 .preloader-svg-graphic {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  animation: preloaderSpin 1.8s linear infinite;
-}
-
-@keyframes preloaderSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  display: none !important;
 }
 
 .preloader-icon {

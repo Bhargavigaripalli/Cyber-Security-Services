@@ -21,10 +21,6 @@
   <div id="preloader-overlay" class="preloader-overlay">
     <div class="preloader-wrapper">
       <div class="preloader-graphics-stage">
-        <svg class="preloader-svg-graphic" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(0, 243, 255, 0.15)" stroke-width="4"></circle>
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#00f3ff" stroke-width="4" stroke-dasharray="70 180" stroke-linecap="round"></circle>
-        </svg>
         <img src="assets/logoStackly.webp" alt="CyberShield Logo" class="preloader-icon">
       </div>
       <div class="preloader-status-text">INITIALIZING CYBERSHIELD PLATFORM...</div>
@@ -144,7 +140,7 @@
         userBtn.classList.remove('active');
         adminBtn.classList.add('admin-active');
         adminBtn.classList.remove('active');
-        emailInput.value = 'admin.soc@gmail.com';
+        emailInput.value = '';
         emailInput.placeholder = 'admin.soc@gmail.com';
         submitText.textContent = 'Authenticate Admin Dashboard';
       } else {
