@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Contact Page Sections
   initEmergencyTiers();
   initOfficeHubs();
+
+  // Initialize Dashboard User Email Display
+  initDashboardUserEmail();
 });
 
 /* ==========================================
@@ -1086,6 +1089,100 @@ function switchAdminTab(tabId, btnElement) {
   if (window.innerWidth <= 992) {
     toggleDashSidebar(false);
   }
+}
+
+/* Initialize Dashboard User Email, Name and Avatar Display */
+function initDashboardUserEmail() {
+  const emailDisplay = document.getElementById('dash-user-email-display');
+  const nameDisplay = document.getElementById('dash-user-name-display');
+  const avatarDisplay = document.getElementById('dash-user-avatar');
+
+  const storedEmail = sessionStorage.getItem('cyber_user_email') || localStorage.getItem('cyber_user_email');
+  const storedName = sessionStorage.getItem('cyber_user_name') || localStorage.getItem('cyber_user_name');
+
+  if (emailDisplay && storedEmail && storedEmail.trim() !== '') {
+    emailDisplay.textContent = storedEmail;
+  }
+  if (nameDisplay && storedName && storedName.trim() !== '') {
+    nameDisplay.textContent = storedName;
+  }
+  if (avatarDisplay) {
+    let initials = '';
+    if (storedName && storedName.trim() !== '') {
+      const parts = storedName.trim().split(/\s+/);
+      if (parts.length >= 2) {
+        initials = (parts[0][0] + parts[1][0]).toUpperCase();
+      } else {
+        initials = parts[0].substring(0, 2).toUpperCase();
+      }
+    } else if (storedEmail && storedEmail.trim() !== '') {
+      initials = storedEmail.substring(0, 2).toUpperCase();
+    }
+    if (initials) {
+      avatarDisplay.textContent = initials;
+    }
+  }
+}
+
+/* Handle Login Form Submit */
+function handleLoginSubmit(event) {
+  if (event) event.preventDefault();
+
+  const emailInput = document.getElementById('login-email');
+  const passInput = document.getElementById('login-pass');
+  const enteredEmail = emailInput ? emailInput.value.trim() : '';
+  const enteredPass = passInput ? passInput.value : '';
+
+  const activeRoleTab = document.querySelector('.role-tab-btn.active');
+  const role = (activeRoleTab && activeRoleTab.id === 'role-admin-btn') ? 'admin' : 'user';
+
+  if (role === 'admin') {
+    sessionStorage.setItem('cyber_user_email', enteredEmail || 'admin.soc@gmail.com');
+    sessionStorage.setItem('cyber_user_name', 'Security Administrator');
+    window.location.href = 'dashboard-admin.html';
+    return;
+  }
+
+  // User authentication against registered accounts
+  let accounts = [];
+  try {
+    accounts = JSON.parse(localStorage.getItem('cyber_accounts') || '[]');
+  } catch (err) {
+    accounts = [];
+  }
+
+  const foundAccount = accounts.find(a => a.email.toLowerCase() === enteredEmail.toLowerCase());
+
+  if (!foundAccount) {
+    alert('No registered account found for ' + enteredEmail + '!\nPlease create an account first.');
+    window.location.href = 'create-account.html';
+    return;
+  }
+
+  if (foundAccount.password !== enteredPass) {
+    alert('Incorrect password! Please enter the correct password.');
+    if (passInput) {
+      passInput.focus();
+      passInput.select();
+    }
+    return;
+  }
+
+  sessionStorage.setItem('cyber_user_email', foundAccount.email);
+  sessionStorage.setItem('cyber_user_name', foundAccount.name);
+  localStorage.setItem('cyber_user_email', foundAccount.email);
+  localStorage.setItem('cyber_user_name', foundAccount.name);
+  sessionStorage.removeItem('just_created_account');
+
+  window.location.href = 'dashboard-user.html';
+}
+
+/* ==========================================
+   Topbar Mobile & Hotline Popup Handler
+   ========================================== */
+function showHotlinePopup(event) {
+  if (event) event.preventDefault();
+  alert("CyberShield Emergency SOC Hotline:\n\nPhone Number: +91 427 245 6789\nLocation: Cyber IT Park, Meyyanur, Salem, Tamil Nadu - 636004\nOperational Status: 24/7 Telemetry SOC Monitoring Active");
 }
 
 

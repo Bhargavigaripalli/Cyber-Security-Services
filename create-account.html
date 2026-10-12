@@ -92,7 +92,7 @@
         <div class="form-group" style="margin-bottom: 24px;">
           <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 0.88rem; color: var(--text-muted);">
             <input type="checkbox" id="terms-checkbox" required style="accent-color: var(--primary-cyan); margin-top: 3px; cursor: pointer;">
-            <span>I agree to CyberShield's <a href="#" style="color: var(--primary-cyan);">Terms of Service</a>, <a href="#" style="color: var(--primary-cyan);">Privacy Policy</a>, and Data SLA <span style="color: var(--alert-red);">*</span></span>
+            <span>I agree to CyberShield's <a href="404.html" style="color: var(--primary-cyan);">Terms of Service</a>, <a href="404.html" style="color: var(--primary-cyan);">Privacy Policy</a>, and Data SLA <span style="color: var(--alert-red);">*</span></span>
           </label>
         </div>
 
@@ -181,6 +181,28 @@
         document.getElementById('terms-checkbox').focus();
         return;
       }
+
+      // Save to localStorage cyber_accounts
+      let accounts = [];
+      try {
+        accounts = JSON.parse(localStorage.getItem('cyber_accounts') || '[]');
+      } catch (err) {
+        accounts = [];
+      }
+      const existingIndex = accounts.findIndex(acc => acc.email.toLowerCase() === gmail.toLowerCase());
+      if (existingIndex >= 0) {
+        accounts[existingIndex] = { name, email: gmail, password: pass };
+      } else {
+        accounts.push({ name, email: gmail, password: pass });
+      }
+      localStorage.setItem('cyber_accounts', JSON.stringify(accounts));
+
+      // Save user session for smooth instant login
+      sessionStorage.setItem('just_created_account', JSON.stringify({ name, email: gmail, password: pass }));
+      sessionStorage.setItem('cyber_user_email', gmail);
+      sessionStorage.setItem('cyber_user_name', name);
+      localStorage.setItem('cyber_user_email', gmail);
+      localStorage.setItem('cyber_user_name', name);
 
       // Redirect to login page
       alert('Account created successfully! Redirecting to login page...');

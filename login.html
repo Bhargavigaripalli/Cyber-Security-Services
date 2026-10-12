@@ -67,13 +67,13 @@
       <form id="login-form" onsubmit="handleLoginSubmit(event)">
         <div class="form-group">
           <label class="form-label" id="email-label">Enterprise Gmail / Email ID <span style="color: var(--alert-red);">*</span></label>
-          <input type="email" id="login-email" class="form-input font-mono" value="user@gmail.com" placeholder="user@gmail.com" required>
+          <input type="email" id="login-email" class="form-input font-mono" placeholder="user@gmail.com" required>
         </div>
 
         <div class="form-group">
           <label class="form-label">Strong Encrypted Password <span style="color: var(--alert-red);">*</span></label>
           <div style="position: relative;">
-            <input type="password" id="login-pass" class="form-input font-mono" value="Cyber@Shield2026!" placeholder="••••••••••••••••" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character." required style="padding-right: 42px;">
+            <input type="password" id="login-pass" class="form-input font-mono" placeholder="••••••••••••••••" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character." required style="padding-right: 42px;">
             <i class="fa-solid fa-eye" id="toggle-pass-btn" onclick="togglePasswordVisibility()" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-muted); font-size: 1.1rem; z-index: 5;" title="Toggle Password Eye Mask"></i>
           </div>
         </div>
@@ -104,6 +104,35 @@
   <script src="script.js"></script>
   <script>
     let currentRole = 'user';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check if user just created an account
+      const createdRaw = sessionStorage.getItem('just_created_account');
+      const emailInput = document.getElementById('login-email');
+      const passInput = document.getElementById('login-pass');
+      const rememberCheckbox = document.getElementById('remember-session');
+
+      if (createdRaw) {
+        try {
+          const created = JSON.parse(createdRaw);
+          if (created && created.email && emailInput) {
+            emailInput.value = created.email;
+            if (passInput && created.password) {
+              passInput.value = created.password;
+            }
+            if (rememberCheckbox) {
+              rememberCheckbox.checked = true;
+            }
+          }
+        } catch (e) {}
+      } else {
+        const storedEmail = sessionStorage.getItem('cyber_user_email') || localStorage.getItem('cyber_user_email');
+        if (storedEmail && emailInput && !emailInput.value) {
+          emailInput.value = storedEmail;
+        }
+      }
+    });
+
     function selectRole(role) {
       currentRole = role;
       const userBtn = document.getElementById('role-user-btn');
@@ -121,8 +150,19 @@
       } else {
         adminBtn.classList.remove('admin-active');
         userBtn.classList.add('active');
-        emailInput.value = 'user@gmail.com';
-        emailInput.placeholder = 'user@gmail.com';
+
+        // Restore user email if previously entered or created
+        const createdRaw = sessionStorage.getItem('just_created_account');
+        let userEmail = '';
+        if (createdRaw) {
+          try { userEmail = JSON.parse(createdRaw).email; } catch (e) {}
+        }
+        if (!userEmail) {
+          userEmail = sessionStorage.getItem('cyber_user_email') || localStorage.getItem('cyber_user_email') || '';
+        }
+
+        emailInput.value = userEmail;
+        emailInput.placeholder = userEmail || 'user@gmail.com';
         submitText.textContent = 'Authenticate User Dashboard';
       }
     }
@@ -143,11 +183,52 @@
 
     function handleLoginSubmit(e) {
       e.preventDefault();
+
+      const emailInput = document.getElementById('login-email');
+      const passInput = document.getElementById('login-pass');
+      const enteredEmail = emailInput ? emailInput.value.trim() : '';
+      const enteredPass = passInput ? passInput.value : '';
+
       if (currentRole === 'admin') {
+        sessionStorage.setItem('cyber_user_email', enteredEmail || 'admin.soc@gmail.com');
+        sessionStorage.setItem('cyber_user_name', 'Security Administrator');
         window.location.href = 'dashboard-admin.html';
-      } else {
-        window.location.href = 'dashboard-user.html';
+        return;
       }
+
+      // User authentication against registered accounts
+      let accounts = [];
+      try {
+        accounts = JSON.parse(localStorage.getItem('cyber_accounts') || '[]');
+      } catch (err) {
+        accounts = [];
+      }
+
+      const foundAccount = accounts.find(a => a.email.toLowerCase() === enteredEmail.toLowerCase());
+
+      if (!foundAccount) {
+        alert('No registered account found for ' + enteredEmail + '!\nPlease create an account first.');
+        window.location.href = 'create-account.html';
+        return;
+      }
+
+      if (foundAccount.password !== enteredPass) {
+        alert('Incorrect password! Please enter the correct password.');
+        if (passInput) {
+          passInput.focus();
+          passInput.select();
+        }
+        return;
+      }
+
+      // Login success: save credentials and redirect to user dashboard
+      sessionStorage.setItem('cyber_user_email', foundAccount.email);
+      sessionStorage.setItem('cyber_user_name', foundAccount.name);
+      localStorage.setItem('cyber_user_email', foundAccount.email);
+      localStorage.setItem('cyber_user_name', foundAccount.name);
+      sessionStorage.removeItem('just_created_account');
+
+      window.location.href = 'dashboard-user.html';
     }
   </script>
 </body>
